@@ -1,0 +1,12 @@
+.header {
+  width: 100%;
+  height: 70px;
+  display: flex;
+  align-items: center;
+}
+
+.name {
+  font-family: 'Montez', sans-serif;
+  font-size: 3rem;
+  color: var(--text-color);
+}
