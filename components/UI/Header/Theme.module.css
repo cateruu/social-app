@@ -7,5 +7,5 @@
 }
 
 .theme:hover {
-  color: var(--text-color);
+  color: var(--icon-inactive);
 }
