@@ -1,4 +1,5 @@
 import { useContext, useState } from 'react';
+import { NextPage } from 'next';
 import Image from 'next/image';
 
 import { ThemeContext } from '../../store/theme-context';
@@ -6,8 +7,9 @@ import { ThemeContext } from '../../store/theme-context';
 import styles from './PostInput.module.css';
 
 import TextareaAutosize from 'react-textarea-autosize';
+import { BsCardImage } from 'react-icons/bs';
 
-const PostInput = () => {
+const PostInput: NextPage = () => {
   const themeCtx = useContext(ThemeContext);
 
   const [textInput, setTextInput] = useState<string>('');
@@ -30,12 +32,22 @@ const PostInput = () => {
       <div className={styles.textContainer}>
         <TextareaAutosize
           placeholder='Tell me something...'
+          maxRows={10}
           value={textInput}
           onChange={(e) => setTextInput(e.target.value)}
           className={`${styles.text} ${
             themeCtx.theme === 'light' ? styles.lightText : null
           }`}
         />
+        <div className={styles.buttons}>
+          <div className={styles.inserts}>
+            <input type='file' />
+          </div>
+          {!textInput && (
+            <div className={`${styles.button} ${styles.fake}`}>Post</div>
+          )}
+          {textInput && <button className={styles.button}>Post</button>}
+        </div>
       </div>
     </section>
   );
