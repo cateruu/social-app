@@ -53,6 +53,15 @@
   height: unset !important;
 }
 
+.deleteImage {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  font-size: 2rem;
+  cursor: pointer;
+  color: var(--border-color);
+}
+
 .buttons {
   display: flex;
   justify-content: space-between;

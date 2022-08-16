@@ -9,6 +9,7 @@ import styles from './PostInput.module.css';
 import TextareaAutosize from 'react-textarea-autosize';
 import { BsCardImage } from 'react-icons/bs';
 import { MdCancel } from 'react-icons/md';
+import { IconContext } from 'react-icons';
 
 const PostInput: NextPage = () => {
   const themeCtx = useContext(ThemeContext);
@@ -43,17 +44,21 @@ const PostInput: NextPage = () => {
             themeCtx.theme === 'light' ? styles.lightText : null
           }`}
         />
-        <div className={styles.selectedImageContainer}>
-          <Image
-            src='https://i.pinimg.com/474x/ec/e2/b0/ece2b0f541d47e4078aef33ffd22777e.jpg'
-            layout='fill'
-            quality={100}
-            alt='user image'
-            className={styles.selectedImage}
-          />
-          {/* <MdCancel /> */}
-        </div>
-        {/* <div className={styles.buttons}>
+        {selectedFile && (
+          <div className={styles.selectedImageContainer}>
+            <Image
+              src={selectedFile}
+              layout='fill'
+              quality={100}
+              alt='user image'
+              className={styles.selectedImage}
+            />
+            <IconContext.Provider value={{ className: styles.deleteImage }}>
+              <MdCancel />
+            </IconContext.Provider>
+          </div>
+        )}
+        <div className={styles.buttons}>
           <div className={styles.inserts}>
             <input type='file' />
           </div>
@@ -61,7 +66,7 @@ const PostInput: NextPage = () => {
             <div className={`${styles.button} ${styles.fake}`}>Post</div>
           )}
           {textInput && <button className={styles.button}>Post</button>}
-        </div> */}
+        </div>
       </div>
     </section>
   );
