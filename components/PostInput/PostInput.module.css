@@ -1,0 +1,15 @@
+.input {
+  width: 100%;
+  padding: 10px 20px;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  display: flex;
+}
+
+.avatarContainer {
+  height: 100%;
+}
+
+.avatar {
+  border-radius: 50%;
+}
