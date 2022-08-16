@@ -1,7 +1,7 @@
 import '../styles/globals.css';
 import type { AppProps } from 'next/app';
 
-import ThemeContextProvider from '../store/theme-context';
+import ThemeContextProvider, { ThemeContext } from '../store/theme-context';
 
 import Layout from '../components/Layout/Layout';
 

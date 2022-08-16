@@ -5,7 +5,6 @@ body {
   padding: 0;
   margin: 0;
   font-family: 'Poppins', sans-serif;
-  background-color: var(--main-bg);
 }
 
 a {
@@ -23,6 +22,7 @@ a {
   --border-color: #38444d;
   --border-color-light: #eff3f4;
   --text-color: #f7f9f9;
+  --text-color-light: #2a3238;
   --icon-inactive: #8b98a5;
   --icon-active: #f91880;
   --action-btn: #1d9bf0;

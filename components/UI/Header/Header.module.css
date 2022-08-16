@@ -11,3 +11,7 @@
   font-size: 3rem;
   color: var(--text-color);
 }
+
+.light {
+  color: var(--text-color-light);
+}
