@@ -2,7 +2,8 @@
   cursor: pointer;
   color: var(--border-color);
   font-size: 1.3rem;
-  transition: 0.15s;
+  transition: 0.1s;
+  user-select: none;
 }
 
 .theme:hover {

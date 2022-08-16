@@ -5,7 +5,15 @@ type Props = {
   children: React.ReactNode;
 };
 
-export const ThemeContext = createContext<string>('dark');
+type ThemeType = {
+  theme: string;
+  changeTheme: () => void;
+};
+
+export const ThemeContext = createContext<ThemeType>({
+  theme: 'dark',
+  changeTheme: () => {},
+});
 
 const ThemeContextProvider: NextPage<Props> = (props) => {
   const [theme, setTheme] = useState<string>('dark');
@@ -14,7 +22,10 @@ const ThemeContextProvider: NextPage<Props> = (props) => {
     setTheme((prevTheme) => (prevTheme === 'dark' ? 'light' : 'dark'));
   };
 
-  const contextValue: string = theme;
+  const contextValue: ThemeType = {
+    theme: theme,
+    changeTheme: changeThemeHandler,
+  };
 
   return (
     <ThemeContext.Provider value={contextValue}>
