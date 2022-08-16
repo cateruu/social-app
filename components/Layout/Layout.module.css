@@ -1,0 +1,6 @@
+.layout {
+  border: 1px solid red;
+  width: 500px;
+  min-height: 100vh;
+  margin: 0 auto;
+}
