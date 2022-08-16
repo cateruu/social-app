@@ -1,9 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Montez&family=Poppins:wght@400;600;700&display=swap');
+
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--main-bg);
 }
 
 a {
@@ -15,12 +17,13 @@ a {
   box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-  body {
-    color: white;
-    background: black;
-  }
+:root {
+  --main-bg: #15202b;
+  --border-color: #38444d;
+  --border-color-light: #eff3f4;
+  --text-color: #f7f9f9;
+  --icon-inactive: #8b98a5;
+  --icon-active: #f91880;
+  --action-btn: #1d9bf0;
+  --placeholder: #8692a0;
 }
