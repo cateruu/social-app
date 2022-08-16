@@ -8,8 +8,47 @@
 
 .avatarContainer {
   height: 100%;
+  margin-right: 10px;
 }
 
 .avatar {
   border-radius: 50%;
+}
+
+.textContainer {
+  flex-basis: 100%;
+}
+
+.text {
+  background: transparent;
+  outline: none;
+  border: none;
+  resize: none;
+  color: var(--text-color);
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.3rem;
+  width: 100%;
+  min-height: 50px;
+  padding: 0;
+}
+
+.text::placeholder {
+  color: var(--placeholder);
+}
+
+.text:focus {
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 10px;
+}
+
+.light {
+  border-color: var(--border-color-light);
+}
+
+.lightText {
+  color: var(--text-color-light);
+}
+
+.lightText:focus {
+  border-bottom: 1px solid var(--border-color-light);
 }
