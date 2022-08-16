@@ -36,8 +36,21 @@
   color: var(--placeholder);
 }
 
-.text:focus {
-  border-bottom: 1px solid var(--border-color);
+.selectedImageContainer {
+  width: 100%;
+  position: relative;
+}
+
+.selectedImageContainer > span {
+  position: unset !important;
+}
+
+.selectedImage {
+  border-radius: 10px;
+  object-fit: contain;
+  width: 100% !important;
+  position: relative !important;
+  height: unset !important;
 }
 
 .buttons {
@@ -71,8 +84,4 @@
 
 .lightText {
   color: var(--text-color-light);
-}
-
-.lightText:focus {
-  border-bottom: 1px solid var(--border-color-light);
 }
