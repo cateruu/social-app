@@ -1,0 +1,10 @@
+.theme {
+  cursor: pointer;
+  color: var(--border-color);
+  font-size: 1.3rem;
+  transition: 0.15s;
+}
+
+.theme:hover {
+  color: var(--text-color);
+}
