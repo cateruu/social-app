@@ -11,6 +11,7 @@ import TextareaAutosize from 'react-textarea-autosize';
 import { BsCardImage, BsEmojiSmile } from 'react-icons/bs';
 import { MdCancel } from 'react-icons/md';
 import { IconContext } from 'react-icons';
+import { IEmojiData } from 'emoji-picker-react';
 
 const Picker = dynamic(
   () => {
@@ -30,7 +31,9 @@ const PostInput: NextPage = () => {
   const imagePickerRef = useRef<HTMLInputElement | null>(null);
 
   const addImageToPost = () => {};
-  const addEmoji = () => {};
+  const addEmoji = (event: MouseEvent, emojiObject: IEmojiData) => {
+    setTextInput((prevText) => prevText + emojiObject.emoji);
+  };
 
   return (
     <section
