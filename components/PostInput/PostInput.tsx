@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useRef, useState } from 'react';
 import { NextPage } from 'next';
 import Image from 'next/image';
 
@@ -18,6 +18,9 @@ const PostInput: NextPage = () => {
   const [selectedFile, setSelectedFile] = useState<HTMLInputElement | null>(
     null
   );
+  const imagePickerRef = useRef<HTMLInputElement | null>(null);
+
+  const addImageToPost = () => {};
 
   return (
     <section
@@ -60,7 +63,20 @@ const PostInput: NextPage = () => {
         )}
         <div className={styles.buttons}>
           <div className={styles.inserts}>
-            <input type='file' />
+            <div
+              className={styles.imagePicker}
+              onClick={() => imagePickerRef.current?.click()}
+            >
+              <IconContext.Provider value={{ className: styles.imageIcon }}>
+                <BsCardImage />
+              </IconContext.Provider>
+              <input
+                type='file'
+                hidden
+                onChange={addImageToPost}
+                ref={imagePickerRef}
+              />
+            </div>
           </div>
           {!textInput && (
             <div className={`${styles.button} ${styles.fake}`}>Post</div>
