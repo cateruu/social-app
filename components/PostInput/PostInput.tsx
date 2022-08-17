@@ -1,4 +1,10 @@
-import { useContext, useRef, useState } from 'react';
+import React, {
+  BaseSyntheticEvent,
+  HTMLInputTypeAttribute,
+  useContext,
+  useRef,
+  useState,
+} from 'react';
 import { NextPage } from 'next';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
@@ -6,6 +12,16 @@ import dynamic from 'next/dynamic';
 import { ThemeContext } from '../../store/theme-context';
 
 import styles from './PostInput.module.css';
+
+import { db, storage } from '../../firebase';
+import {
+  addDoc,
+  collection,
+  doc,
+  serverTimestamp,
+  updateDoc,
+} from '@firebase/firestore';
+import { getDownloadURL, ref, uploadString } from '@firebase/storage';
 
 import TextareaAutosize from 'react-textarea-autosize';
 import { BsCardImage, BsEmojiSmile } from 'react-icons/bs';
@@ -24,19 +40,51 @@ const PostInput: NextPage = () => {
   const themeCtx = useContext(ThemeContext);
 
   const [textInput, setTextInput] = useState<string>('');
-  const [selectedImage, setSelectedImage] = useState<HTMLInputElement | null>(
-    null
-  );
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [showEmojis, setShowEmojis] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const imagePickerRef = useRef<HTMLInputElement | null>(null);
 
-  const sendPost = () => {
+  const sendPost = async () => {
     if (loading) return;
     setLoading(true);
+
+    const docRef = await addDoc(collection(db, 'posts'), {
+      text: textInput,
+      timestamp: serverTimestamp(),
+    });
+
+    const imageRef = ref(storage, `posts/${docRef.id}/image`);
+
+    if (selectedImage) {
+      await uploadString(imageRef, selectedImage, 'data_url').then(async () => {
+        const downloadUrl = await getDownloadURL(imageRef);
+        await updateDoc(doc(db, 'posts', docRef.id), {
+          image: downloadUrl,
+        });
+      });
+    }
+
+    setLoading(false);
+    setTextInput('');
+    setSelectedImage(null);
+    setShowEmojis(false);
   };
 
-  const addImageToPost = () => {};
+  const addImageToPost = (e: BaseSyntheticEvent) => {
+    const reader = new FileReader();
+    if (e.target.files[0]) {
+      reader.readAsDataURL(e.target.files[0]);
+    }
+
+    reader.onload = (readerEvent: any) => {
+      setSelectedImage(readerEvent.target.result);
+    };
+  };
+
+  const removeImageFromPost = () => {
+    setSelectedImage(null);
+  };
 
   const addEmoji = (event: React.MouseEvent, emojiObject: IEmojiData) => {
     setTextInput((prevText) => prevText + emojiObject.emoji);
@@ -77,7 +125,7 @@ const PostInput: NextPage = () => {
               className={styles.selectedImage}
             />
             <IconContext.Provider value={{ className: styles.deleteImage }}>
-              <MdCancel />
+              <MdCancel onClick={removeImageFromPost} />
             </IconContext.Provider>
           </div>
         )}
