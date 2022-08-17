@@ -1,15 +1,23 @@
 import { useContext, useRef, useState } from 'react';
 import { NextPage } from 'next';
 import Image from 'next/image';
+import dynamic from 'next/dynamic';
 
 import { ThemeContext } from '../../store/theme-context';
 
 import styles from './PostInput.module.css';
 
 import TextareaAutosize from 'react-textarea-autosize';
-import { BsCardImage } from 'react-icons/bs';
+import { BsCardImage, BsEmojiSmile } from 'react-icons/bs';
 import { MdCancel } from 'react-icons/md';
 import { IconContext } from 'react-icons';
+
+const Picker = dynamic(
+  () => {
+    return import('emoji-picker-react');
+  },
+  { ssr: false }
+);
 
 const PostInput: NextPage = () => {
   const themeCtx = useContext(ThemeContext);
@@ -18,9 +26,11 @@ const PostInput: NextPage = () => {
   const [selectedFile, setSelectedFile] = useState<HTMLInputElement | null>(
     null
   );
+  const [showEmojis, setShowEmojis] = useState<boolean>(false);
   const imagePickerRef = useRef<HTMLInputElement | null>(null);
 
   const addImageToPost = () => {};
+  const addEmoji = () => {};
 
   return (
     <section
@@ -64,10 +74,10 @@ const PostInput: NextPage = () => {
         <div className={styles.buttons}>
           <div className={styles.inserts}>
             <div
-              className={styles.imagePicker}
+              className={styles.iconContainer}
               onClick={() => imagePickerRef.current?.click()}
             >
-              <IconContext.Provider value={{ className: styles.imageIcon }}>
+              <IconContext.Provider value={{ className: styles.icon }}>
                 <BsCardImage />
               </IconContext.Provider>
               <input
@@ -77,6 +87,15 @@ const PostInput: NextPage = () => {
                 ref={imagePickerRef}
               />
             </div>
+            <div
+              className={styles.iconContainer}
+              onClick={() => setShowEmojis(!showEmojis)}
+            >
+              <IconContext.Provider value={{ className: styles.icon }}>
+                <BsEmojiSmile />
+              </IconContext.Provider>
+            </div>
+            {showEmojis && <Picker onEmojiClick={addEmoji} />}
           </div>
           {!textInput && (
             <div className={`${styles.button} ${styles.fake}`}>Post</div>

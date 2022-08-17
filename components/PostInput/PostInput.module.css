@@ -71,15 +71,17 @@
 .inserts {
   display: flex;
   align-items: center;
+  position: relative;
 }
 
-.imagePicker {
+.iconContainer {
   line-height: 100%;
   height: 100%;
   border-radius: 50%;
+  margin-right: 15px;
 }
 
-.imageIcon {
+.icon {
   color: var(--blue-bg);
   font-size: 1.3rem;
   cursor: pointer;
