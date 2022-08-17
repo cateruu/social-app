@@ -11,7 +11,7 @@ import TextareaAutosize from 'react-textarea-autosize';
 import { BsCardImage, BsEmojiSmile } from 'react-icons/bs';
 import { MdCancel } from 'react-icons/md';
 import { IconContext } from 'react-icons';
-import { IEmojiData, IEmojiPickerProps } from 'emoji-picker-react';
+import { IEmojiData } from 'emoji-picker-react';
 
 const Picker = dynamic(
   () => {
@@ -24,13 +24,20 @@ const PostInput: NextPage = () => {
   const themeCtx = useContext(ThemeContext);
 
   const [textInput, setTextInput] = useState<string>('');
-  const [selectedFile, setSelectedFile] = useState<HTMLInputElement | null>(
+  const [selectedImage, setSelectedImage] = useState<HTMLInputElement | null>(
     null
   );
   const [showEmojis, setShowEmojis] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const imagePickerRef = useRef<HTMLInputElement | null>(null);
 
+  const sendPost = () => {
+    if (loading) return;
+    setLoading(true);
+  };
+
   const addImageToPost = () => {};
+
   const addEmoji = (event: React.MouseEvent, emojiObject: IEmojiData) => {
     setTextInput((prevText) => prevText + emojiObject.emoji);
   };
@@ -60,10 +67,10 @@ const PostInput: NextPage = () => {
             themeCtx.theme === 'light' ? styles.lightText : null
           }`}
         />
-        {selectedFile && (
+        {selectedImage && (
           <div className={styles.selectedImageContainer}>
             <Image
-              src={selectedFile}
+              src={selectedImage}
               layout='fill'
               quality={100}
               alt='user image'
@@ -100,10 +107,13 @@ const PostInput: NextPage = () => {
             </div>
             {showEmojis && <Picker onEmojiClick={addEmoji} />}
           </div>
-          {!textInput && (
-            <div className={`${styles.button} ${styles.fake}`}>Post</div>
-          )}
-          {textInput && <button className={styles.button}>Post</button>}
+          <button
+            className={styles.button}
+            disabled={!textInput.trim() && !selectedImage}
+            onClick={sendPost}
+          >
+            Post
+          </button>
         </div>
       </div>
     </section>
