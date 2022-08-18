@@ -39,6 +39,7 @@
 .selectedImageContainer {
   width: 100%;
   position: relative;
+  margin-bottom: 10px;
 }
 
 .selectedImageContainer > span {

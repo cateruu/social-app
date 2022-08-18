@@ -1,0 +1,72 @@
+.auth {
+  width: 100%;
+  margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  color: var(--text-color);
+  font-size: 2rem;
+}
+
+.lightHeader {
+  color: var(--text-color-light);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.input {
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  background: transparent;
+  height: 50px;
+  padding: 0 20px;
+  margin: 5px 0;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.1rem;
+  color: var(--text-color);
+  transition: 0.1s;
+  outline: none;
+}
+
+.input::placeholder {
+  color: var(--placeholder);
+}
+
+.input:focus {
+  border-color: var(--border-color-darker);
+}
+
+.lightInput {
+  color: var(--text-color-light);
+  border-color: var(--border-color-light);
+}
+
+.lightInput:focus {
+  border-color: var(--placeholder);
+}
+
+.submit {
+  margin-top: 20px;
+  height: 50px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  background: linear-gradient(89.44deg, #1d9bf0 0%, #6bb5e7 100%);
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.1rem;
+  color: var(--text-color);
+  cursor: pointer;
+}
+
+.link {
+  align-self: center;
+  color: var(--placeholder);
+  cursor: pointer;
+  font-size: 0.8rem;
+  margin-top: 5px;
+}

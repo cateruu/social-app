@@ -1,10 +1,4 @@
-import React, {
-  BaseSyntheticEvent,
-  HTMLInputTypeAttribute,
-  useContext,
-  useRef,
-  useState,
-} from 'react';
+import React, { BaseSyntheticEvent, useContext, useRef, useState } from 'react';
 import { NextPage } from 'next';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
@@ -13,7 +7,7 @@ import { ThemeContext } from '../../store/theme-context';
 
 import styles from './PostInput.module.css';
 
-import { db, storage } from '../../firebase';
+import { db, storage } from '../../config/firebase';
 import {
   addDoc,
   collection,
@@ -82,10 +76,6 @@ const PostInput: NextPage = () => {
     };
   };
 
-  const removeImageFromPost = () => {
-    setSelectedImage(null);
-  };
-
   const addEmoji = (event: React.MouseEvent, emojiObject: IEmojiData) => {
     setTextInput((prevText) => prevText + emojiObject.emoji);
   };
@@ -125,44 +115,46 @@ const PostInput: NextPage = () => {
               className={styles.selectedImage}
             />
             <IconContext.Provider value={{ className: styles.deleteImage }}>
-              <MdCancel onClick={removeImageFromPost} />
+              <MdCancel onClick={() => setSelectedImage(null)} />
             </IconContext.Provider>
           </div>
         )}
-        <div className={styles.buttons}>
-          <div className={styles.inserts}>
-            <div
-              className={styles.iconContainer}
-              onClick={() => imagePickerRef.current?.click()}
-            >
-              <IconContext.Provider value={{ className: styles.icon }}>
-                <BsCardImage />
-              </IconContext.Provider>
-              <input
-                type='file'
-                hidden
-                onChange={addImageToPost}
-                ref={imagePickerRef}
-              />
+        {!loading && (
+          <div className={styles.buttons}>
+            <div className={styles.inserts}>
+              <div
+                className={styles.iconContainer}
+                onClick={() => imagePickerRef.current?.click()}
+              >
+                <IconContext.Provider value={{ className: styles.icon }}>
+                  <BsCardImage />
+                </IconContext.Provider>
+                <input
+                  type='file'
+                  hidden
+                  onChange={addImageToPost}
+                  ref={imagePickerRef}
+                />
+              </div>
+              <div
+                className={styles.iconContainer}
+                onClick={() => setShowEmojis(!showEmojis)}
+              >
+                <IconContext.Provider value={{ className: styles.icon }}>
+                  <BsEmojiSmile />
+                </IconContext.Provider>
+              </div>
+              {showEmojis && <Picker onEmojiClick={addEmoji} />}
             </div>
-            <div
-              className={styles.iconContainer}
-              onClick={() => setShowEmojis(!showEmojis)}
+            <button
+              className={styles.button}
+              disabled={!textInput.trim() && !selectedImage}
+              onClick={sendPost}
             >
-              <IconContext.Provider value={{ className: styles.icon }}>
-                <BsEmojiSmile />
-              </IconContext.Provider>
-            </div>
-            {showEmojis && <Picker onEmojiClick={addEmoji} />}
+              Post
+            </button>
           </div>
-          <button
-            className={styles.button}
-            disabled={!textInput.trim() && !selectedImage}
-            onClick={sendPost}
-          >
-            Post
-          </button>
-        </div>
+        )}
       </div>
     </section>
   );
