@@ -9,7 +9,7 @@ import Theme from './Theme';
 
 const Header = () => {
   const { theme } = useTheme();
-  const { user, logout } = useAuth();
+  const { userAuth, logout } = useAuth();
 
   return (
     <header className={styles.header}>
@@ -20,7 +20,7 @@ const Header = () => {
       </Link>
       <div className={styles.container}>
         <Theme />
-        {user && (
+        {userAuth && (
           <button
             className={`${styles.button} ${styles.logout}`}
             onClick={logout}
@@ -28,7 +28,7 @@ const Header = () => {
             Logout
           </button>
         )}
-        {!user && (
+        {!userAuth && (
           <Link href='/login'>
             <button className={`${styles.button} ${styles.login}`}>
               Login

@@ -6,43 +6,49 @@ import {
   signInWithEmailAndPassword,
   signOut,
   UserCredential,
+  User,
 } from 'firebase/auth';
-import { auth } from '../config/firebase';
+
+import { auth, db } from '../config/firebase';
+import { addDoc, collection } from 'firebase/firestore';
 
 type Props = {
   children: React.ReactNode;
 };
 
-// type AuthType = {
-//   user: any;
-//   signup: (email: string, password: string) => Promise<UserCredential>;
-//   login: (email: string, password: string) => Promise<UserCredential>;
-//   logout: () => void;
-// };
+type AuthType = {
+  userAuth: User | null;
+  signup: (email: string, password: string) => Promise<UserCredential> | void;
+  login: (email: string, password: string) => Promise<UserCredential> | void;
+  logout: () => void;
+};
 
-const AuthContext = createContext<any>({});
+const AuthContext = createContext<AuthType>({
+  userAuth: null,
+  signup: (email: string, password: string) => {},
+  login: (email: string, password: string) => {},
+  logout: () => {},
+});
 
 export const useAuth = () => useContext(AuthContext);
 
 const AuthContextProvider = ({ children }: Props) => {
-  const [user, setUser] = useState<any>(null);
+  const [userAuth, setUserAuth] = useState<any>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setLoading(true);
       if (user) {
-        setUser({
+        setUserAuth({
           uid: user?.uid,
           email: user?.email,
-          displayName: user?.displayName,
         });
       } else {
-        setUser(null);
+        setUserAuth(null);
       }
       setLoading(false);
     });
-
     return () => unsubscribe();
   }, []);
 
@@ -55,12 +61,12 @@ const AuthContextProvider = ({ children }: Props) => {
   };
 
   const logout = async () => {
-    setUser(null);
+    setUserAuth(null);
     await signOut(auth);
   };
 
-  const AuthValue = {
-    user: user,
+  const AuthValue: AuthType = {
+    userAuth: userAuth,
     signup: signup,
     login: login,
     logout: logout,

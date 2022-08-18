@@ -10,18 +10,17 @@ import { useAuth } from '../../store/auth-context';
 
 const SignupPage: NextPage = () => {
   const { theme } = useTheme();
-  const { user, signup } = useAuth();
+  const { userAuth, signup } = useAuth();
 
   const usernameRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
-  const confirmPasswordRef = useRef<HTMLInputElement>(null);
 
   const submitHandler = async (e: FormEvent) => {
     e.preventDefault();
 
     try {
-      await signup(emailRef.current?.value, passwordRef.current?.value);
+      await signup(emailRef.current!.value, passwordRef.current!.value);
     } catch (error) {
       console.error(error);
     }
@@ -68,14 +67,6 @@ const SignupPage: NextPage = () => {
               theme === 'light' && styles.lightInput
             }`}
             ref={passwordRef}
-          />
-          <input
-            type='password'
-            placeholder='Confirm password'
-            className={`${styles.input} ${
-              theme === 'light' && styles.lightInput
-            }`}
-            ref={confirmPasswordRef}
           />
           <button className={styles.submit}>Sign up</button>
         </form>
