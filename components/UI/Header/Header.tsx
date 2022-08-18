@@ -2,12 +2,12 @@ import { useContext } from 'react';
 
 import styles from './Header.module.css';
 
-import { ThemeContext } from '../../../store/theme-context';
+import { useTheme } from '../../../store/theme-context';
 
 import Theme from './Theme';
 
 const Header = () => {
-  const themeCtx = useContext(ThemeContext);
+  const themeCtx = useTheme();
 
   return (
     <header className={styles.header}>

@@ -1,14 +1,28 @@
-import { useContext } from 'react';
+import { FormEvent, useRef } from 'react';
 import { NextPage } from 'next';
 import Link from 'next/link';
 
-import { ThemeContext } from '../../store/theme-context';
+import { useTheme } from '../../store/theme-context';
 
 import styles from '../../styles/Auth.module.css';
 import Head from 'next/head';
 
 const SignupPage: NextPage = () => {
-  const themeCtx = useContext(ThemeContext);
+  const themeCtx = useTheme();
+
+  const usernameRef = useRef<HTMLInputElement>(null);
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
+  const confirmPasswordRef = useRef<HTMLInputElement>(null);
+
+  const submitHandler = (e: FormEvent) => {
+    e.preventDefault();
+
+    console.log(usernameRef.current?.value);
+    console.log(emailRef.current?.value);
+    console.log(passwordRef.current?.value);
+    console.log(confirmPasswordRef.current?.value);
+  };
 
   return (
     <>
@@ -27,13 +41,14 @@ const SignupPage: NextPage = () => {
         >
           Sign up
         </h1>
-        <form className={styles.form}>
+        <form className={styles.form} onSubmit={submitHandler}>
           <input
             type='text'
             placeholder='Username'
             className={`${styles.input} ${
               themeCtx.theme === 'light' && styles.lightInput
             }`}
+            ref={usernameRef}
           />
           <input
             type='email'
@@ -41,6 +56,7 @@ const SignupPage: NextPage = () => {
             className={`${styles.input} ${
               themeCtx.theme === 'light' && styles.lightInput
             }`}
+            ref={emailRef}
           />
           <input
             type='password'
@@ -48,6 +64,7 @@ const SignupPage: NextPage = () => {
             className={`${styles.input} ${
               themeCtx.theme === 'light' && styles.lightInput
             }`}
+            ref={passwordRef}
           />
           <input
             type='password'
@@ -55,6 +72,7 @@ const SignupPage: NextPage = () => {
             className={`${styles.input} ${
               themeCtx.theme === 'light' && styles.lightInput
             }`}
+            ref={confirmPasswordRef}
           />
           <button className={styles.submit}>Sign up</button>
         </form>

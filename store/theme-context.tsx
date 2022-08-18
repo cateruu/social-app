@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react';
+import { createContext, useContext, useState } from 'react';
 import { NextPage } from 'next';
 
 type Props = {
@@ -10,10 +10,12 @@ type ThemeType = {
   changeTheme: () => void;
 };
 
-export const ThemeContext = createContext<ThemeType>({
+const ThemeContext = createContext<ThemeType>({
   theme: 'dark',
   changeTheme: () => {},
 });
+
+export const useTheme = () => useContext(ThemeContext);
 
 const ThemeContextProvider: NextPage<Props> = (props) => {
   const [theme, setTheme] = useState<string>('dark');

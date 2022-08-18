@@ -1,15 +1,25 @@
-import { useContext } from 'react';
+import { FormEvent, useRef } from 'react';
 import { NextPage } from 'next';
 import Link from 'next/link';
 
-import { ThemeContext } from '../../store/theme-context';
+import { useTheme } from '../../store/theme-context';
 
 import Head from 'next/head';
 
 import styles from '../../styles/Auth.module.css';
 
 const LoginPage: NextPage = () => {
-  const themeCtx = useContext(ThemeContext);
+  const themeCtx = useTheme();
+
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
+
+  const submitHandler = (e: FormEvent) => {
+    e.preventDefault();
+
+    console.log(emailRef.current?.value);
+    console.log(passwordRef.current?.value);
+  };
 
   return (
     <>
@@ -28,13 +38,14 @@ const LoginPage: NextPage = () => {
         >
           Login
         </h1>
-        <form className={styles.form}>
+        <form className={styles.form} onSubmit={submitHandler}>
           <input
             type='email'
             placeholder='Email'
             className={`${styles.input} ${
               themeCtx.theme === 'light' && styles.lightInput
             }`}
+            ref={emailRef}
           />
           <input
             type='password'
@@ -42,6 +53,7 @@ const LoginPage: NextPage = () => {
             className={`${styles.input} ${
               themeCtx.theme === 'light' && styles.lightInput
             }`}
+            ref={passwordRef}
           />
           <button className={styles.submit}>Login</button>
         </form>

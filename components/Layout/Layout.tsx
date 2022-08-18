@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 
-import { ThemeContext } from '../../store/theme-context';
+import { useTheme } from '../../store/theme-context';
 
 import styles from './Layout.module.css';
 
@@ -11,7 +11,7 @@ type Props = {
 };
 
 const Layout: React.FC<Props> = (props) => {
-  const themeCtx = useContext(ThemeContext);
+  const themeCtx = useTheme();
 
   return (
     <div className={styles.layout}>
