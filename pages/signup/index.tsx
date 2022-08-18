@@ -9,8 +9,7 @@ import Head from 'next/head';
 import { useAuth } from '../../store/auth-context';
 
 const SignupPage: NextPage = () => {
-  const themeCtx = useTheme();
-
+  const { theme } = useTheme();
   const { user, signup } = useAuth();
 
   const usernameRef = useRef<HTMLInputElement>(null);
@@ -40,7 +39,7 @@ const SignupPage: NextPage = () => {
       <section className={styles.auth}>
         <h1
           className={`${styles.header} ${
-            themeCtx.theme === 'light' && styles.lightHeader
+            theme === 'light' && styles.lightHeader
           }`}
         >
           Sign up
@@ -50,7 +49,7 @@ const SignupPage: NextPage = () => {
             type='text'
             placeholder='Username'
             className={`${styles.input} ${
-              themeCtx.theme === 'light' && styles.lightInput
+              theme === 'light' && styles.lightInput
             }`}
             ref={usernameRef}
           />
@@ -58,7 +57,7 @@ const SignupPage: NextPage = () => {
             type='email'
             placeholder='Email'
             className={`${styles.input} ${
-              themeCtx.theme === 'light' && styles.lightInput
+              theme === 'light' && styles.lightInput
             }`}
             ref={emailRef}
           />
@@ -66,7 +65,7 @@ const SignupPage: NextPage = () => {
             type='password'
             placeholder='Password'
             className={`${styles.input} ${
-              themeCtx.theme === 'light' && styles.lightInput
+              theme === 'light' && styles.lightInput
             }`}
             ref={passwordRef}
           />
@@ -74,7 +73,7 @@ const SignupPage: NextPage = () => {
             type='password'
             placeholder='Confirm password'
             className={`${styles.input} ${
-              themeCtx.theme === 'light' && styles.lightInput
+              theme === 'light' && styles.lightInput
             }`}
             ref={confirmPasswordRef}
           />

@@ -4,6 +4,7 @@
   font-size: 1.3rem;
   transition: 0.1s;
   user-select: none;
+  line-height: 0%;
 }
 
 .theme:hover {

@@ -1,9 +1,9 @@
-import React, { BaseSyntheticEvent, useContext, useRef, useState } from 'react';
+import React, { BaseSyntheticEvent, useRef, useState } from 'react';
 import { NextPage } from 'next';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
 
-import { ThemeContext } from '../../store/theme-context';
+import { useTheme } from '../../store/theme-context';
 
 import styles from './PostInput.module.css';
 
@@ -31,7 +31,7 @@ const Picker = dynamic(
 );
 
 const PostInput: NextPage = () => {
-  const themeCtx = useContext(ThemeContext);
+  const { theme } = useTheme();
 
   const [textInput, setTextInput] = useState<string>('');
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
@@ -81,11 +81,7 @@ const PostInput: NextPage = () => {
   };
 
   return (
-    <section
-      className={`${styles.input} ${
-        themeCtx.theme === 'light' ? styles.light : null
-      }`}
-    >
+    <section className={`${styles.input} ${theme === 'light' && styles.light}`}>
       <div className={styles.avatarContainer}>
         <Image
           src='https://i.pinimg.com/474x/ec/e2/b0/ece2b0f541d47e4078aef33ffd22777e.jpg'
@@ -101,9 +97,7 @@ const PostInput: NextPage = () => {
           maxRows={10}
           value={textInput}
           onChange={(e) => setTextInput(e.target.value)}
-          className={`${styles.text} ${
-            themeCtx.theme === 'light' ? styles.lightText : null
-          }`}
+          className={`${styles.text} ${theme === 'light' && styles.light}`}
         />
         {selectedImage && (
           <div className={styles.selectedImageContainer}>

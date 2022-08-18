@@ -10,8 +10,7 @@ import styles from '../../styles/Auth.module.css';
 import { useAuth } from '../../store/auth-context';
 
 const LoginPage: NextPage = () => {
-  const themeCtx = useTheme();
-
+  const { theme } = useTheme();
   const { login } = useAuth();
 
   const emailRef = useRef<HTMLInputElement>(null);
@@ -39,7 +38,7 @@ const LoginPage: NextPage = () => {
       <section className={styles.auth}>
         <h1
           className={`${styles.header} ${
-            themeCtx.theme === 'light' && styles.lightHeader
+            theme === 'light' && styles.lightHeader
           }`}
         >
           Login
@@ -49,7 +48,7 @@ const LoginPage: NextPage = () => {
             type='email'
             placeholder='Email'
             className={`${styles.input} ${
-              themeCtx.theme === 'light' && styles.lightInput
+              theme === 'light' && styles.lightInput
             }`}
             ref={emailRef}
           />
@@ -57,7 +56,7 @@ const LoginPage: NextPage = () => {
             type='password'
             placeholder='Password'
             className={`${styles.input} ${
-              themeCtx.theme === 'light' && styles.lightInput
+              theme === 'light' && styles.lightInput
             }`}
             ref={passwordRef}
           />

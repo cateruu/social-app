@@ -1,5 +1,3 @@
-import { useContext } from 'react';
-
 import { useTheme } from '../../store/theme-context';
 
 import styles from './Layout.module.css';
@@ -11,7 +9,7 @@ type Props = {
 };
 
 const Layout: React.FC<Props> = (props) => {
-  const themeCtx = useTheme();
+  const { theme } = useTheme();
 
   return (
     <div className={styles.layout}>
@@ -20,7 +18,7 @@ const Layout: React.FC<Props> = (props) => {
       <style jsx global>
         {`
           body {
-            background: ${themeCtx.theme === 'dark' ? '#15202b' : '#fff'};
+            background: ${theme === 'dark' ? '#15202b' : '#fff'};
           }
         `}
       </style>

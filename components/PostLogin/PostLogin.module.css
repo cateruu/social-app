@@ -1,0 +1,31 @@
+.container {
+  width: 100%;
+  height: 110px;
+  background: linear-gradient(86.23deg, #1d9bf0 0%, #6bb5e7 100%);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.text {
+  color: var(--text-color);
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.button {
+  height: 35px;
+  width: 100px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.9rem;
+  margin-left: 10px;
+  color: var(--text-color);
+  background-color: var(--border-color);
+  margin-top: 10px;
+}
