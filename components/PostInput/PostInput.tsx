@@ -22,6 +22,7 @@ import { BsCardImage, BsEmojiSmile } from 'react-icons/bs';
 import { MdCancel } from 'react-icons/md';
 import { IconContext } from 'react-icons';
 import { IEmojiData } from 'emoji-picker-react';
+import { useUser } from '@auth0/nextjs-auth0';
 
 const Picker = dynamic(
   () => {
@@ -32,6 +33,8 @@ const Picker = dynamic(
 
 const PostInput: NextPage = () => {
   const { theme } = useTheme();
+
+  const { user, error, isLoading } = useUser();
 
   const [textInput, setTextInput] = useState<string>('');
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
@@ -80,11 +83,14 @@ const PostInput: NextPage = () => {
     setTextInput((prevText) => prevText + emojiObject.emoji);
   };
 
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>{error.message}</div>;
+
   return (
     <section className={`${styles.input} ${theme === 'light' && styles.light}`}>
       <div className={styles.avatarContainer}>
         <Image
-          src='https://i.pinimg.com/474x/ec/e2/b0/ece2b0f541d47e4078aef33ffd22777e.jpg'
+          src={user?.picture}
           alt='avatar'
           width={50}
           height={50}
