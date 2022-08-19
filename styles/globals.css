@@ -19,6 +19,8 @@ a {
 :root {
   --main-bg: #15202b;
   --blue-bg: #1d9bf0;
+  --bg-color-hover: #172330;
+  --bg-color-hover-light: #f7f7f7;
   --border-color: #38444d;
   --border-color-darker: #2d363d;
   --border-color-light: #e3e8e9;

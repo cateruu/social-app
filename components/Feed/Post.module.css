@@ -5,6 +5,13 @@
   padding: 10px 20px;
   display: flex;
   margin-bottom: 10px;
+  transition: 0.1s;
+  cursor: pointer;
+  color: var(--text-color);
+}
+
+.post:hover {
+  background-color: var(--bg-color-hover);
 }
 
 .profilePicContainer {
@@ -24,14 +31,13 @@
 
 .username {
   margin: 0;
-  color: var(--text-color);
   font-weight: 600;
   margin-top: 5px;
 }
 
 .text {
   margin: 10px 0 5px 0;
-  color: var(--text-color);
+  font-size: 0.9rem;
 }
 
 .imageContainer {
@@ -50,4 +56,35 @@
   width: 100% !important;
   position: relative !important;
   height: unset !important;
+}
+
+.actionsContainer {
+  display: flex;
+}
+
+.iconContainer {
+  margin-right: 50px;
+  color: var(--placeholder);
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: 0.1s;
+}
+
+.iconContainer:hover {
+  color: var(--blue-bg);
+}
+
+.amount {
+  margin-left: 5px;
+  font-size: 0.8rem;
+}
+
+.light {
+  border-color: var(--border-color-light);
+  color: var(--text-color-light);
+}
+
+.light:hover {
+  background-color: var(--bg-color-hover-light);
 }

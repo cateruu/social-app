@@ -5,6 +5,10 @@ import styles from './Post.module.css';
 
 import { PostType } from './Feed';
 
+import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
+import { FaRegComment } from 'react-icons/fa';
+import { useTheme } from '../../store/theme-context';
+
 interface Post {
   id: string;
   post: PostType;
@@ -12,8 +16,10 @@ interface Post {
 }
 
 const Post: NextPage<Post> = ({ id, post, postPage }) => {
+  const { theme } = useTheme();
+
   return (
-    <div className={styles.post}>
+    <section className={`${styles.post} ${theme === 'light' && styles.light}`}>
       <div className={styles.profilePicContainer}>
         <Image
           src={post.profilePic}
@@ -36,8 +42,18 @@ const Post: NextPage<Post> = ({ id, post, postPage }) => {
             />
           </div>
         )}
+        <div className={styles.actionsContainer}>
+          <div className={styles.iconContainer}>
+            <AiOutlineHeart />
+            <span className={styles.amount}>777</span>
+          </div>
+          <div className={styles.iconContainer}>
+            <FaRegComment />
+            <span className={styles.amount}>777</span>
+          </div>
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
 
