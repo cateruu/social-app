@@ -7,23 +7,15 @@ import { useTheme } from '../../store/theme-context';
 import Head from 'next/head';
 
 import styles from '../../styles/Auth.module.css';
-import { useAuth } from '../../store/auth-context';
 
 const LoginPage: NextPage = () => {
   const { theme } = useTheme();
-  const { login } = useAuth();
 
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
   const submitHandler = async (e: FormEvent) => {
     e.preventDefault();
-
-    try {
-      await login(emailRef.current?.value, passwordRef.current?.value);
-    } catch (error) {
-      console.error(error);
-    }
   };
 
   return (

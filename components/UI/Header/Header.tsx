@@ -3,13 +3,11 @@ import Link from 'next/link';
 import styles from './Header.module.css';
 
 import { useTheme } from '../../../store/theme-context';
-import { useAuth } from '../../../store/auth-context';
 
 import Theme from './Theme';
 
 const Header = () => {
   const { theme } = useTheme();
-  const { userAuth, logout } = useAuth();
 
   return (
     <header className={styles.header}>
@@ -20,21 +18,6 @@ const Header = () => {
       </Link>
       <div className={styles.container}>
         <Theme />
-        {userAuth && (
-          <button
-            className={`${styles.button} ${styles.logout}`}
-            onClick={logout}
-          >
-            Logout
-          </button>
-        )}
-        {!userAuth && (
-          <Link href='/login'>
-            <button className={`${styles.button} ${styles.login}`}>
-              Login
-            </button>
-          </Link>
-        )}
       </div>
     </header>
   );

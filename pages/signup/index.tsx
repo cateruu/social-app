@@ -6,11 +6,9 @@ import { useTheme } from '../../store/theme-context';
 
 import styles from '../../styles/Auth.module.css';
 import Head from 'next/head';
-import { useAuth } from '../../store/auth-context';
 
 const SignupPage: NextPage = () => {
   const { theme } = useTheme();
-  const { userAuth, signup } = useAuth();
 
   const usernameRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
@@ -18,12 +16,6 @@ const SignupPage: NextPage = () => {
 
   const submitHandler = async (e: FormEvent) => {
     e.preventDefault();
-
-    try {
-      await signup(emailRef.current!.value, passwordRef.current!.value);
-    } catch (error) {
-      console.error(error);
-    }
   };
 
   return (
