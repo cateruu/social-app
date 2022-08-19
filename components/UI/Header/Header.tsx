@@ -18,6 +18,9 @@ const Header = () => {
       </Link>
       <div className={styles.container}>
         <Theme />
+        <a href='/api/auth/login'>
+          <button className={`${styles.button} ${styles.login}`}>Login</button>
+        </a>
       </div>
     </header>
   );

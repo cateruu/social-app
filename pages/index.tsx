@@ -1,4 +1,4 @@
-import type { GetServerSideProps, NextPage } from 'next';
+import type { NextPage } from 'next';
 import Head from 'next/head';
 
 import PostInput from '../components/PostInput/PostInput';
@@ -17,15 +17,3 @@ const Home: NextPage = () => {
 };
 
 export default Home;
-
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const providers = await getProviders();
-  const session = await getSession(context);
-
-  return {
-    props: {
-      providers,
-      session,
-    },
-  };
-};
