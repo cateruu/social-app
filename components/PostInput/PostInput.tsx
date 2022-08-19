@@ -51,7 +51,7 @@ const PostInput: NextPage = () => {
 
     const docRef = await addDoc(collection(db, 'posts'), {
       id: user?.sub,
-      username: user?.username,
+      username: user?.nickname,
       profilePic: user?.picture,
       text: textInput,
       timestamp: serverTimestamp(),

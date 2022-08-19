@@ -1,6 +1,7 @@
 import { useUser } from '@auth0/nextjs-auth0';
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import Feed from '../components/Feed/Feed';
 
 import PostInput from '../components/PostInput/PostInput';
 import PostLogin from '../components/PostLogin/PostLogin';
@@ -18,6 +19,7 @@ const Home: NextPage = () => {
         <meta name='description' content='The best social app on earth.' />
       </Head>
       {!user ? <PostLogin /> : <PostInput />}
+      <Feed />
     </>
   );
 };
