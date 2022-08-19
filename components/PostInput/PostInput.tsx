@@ -42,11 +42,17 @@ const PostInput: NextPage = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const imagePickerRef = useRef<HTMLInputElement | null>(null);
 
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>{error.message}</div>;
+
   const sendPost = async () => {
     if (loading) return;
     setLoading(true);
 
     const docRef = await addDoc(collection(db, 'posts'), {
+      id: user?.sub,
+      username: user?.username,
+      profilePic: user?.picture,
       text: textInput,
       timestamp: serverTimestamp(),
     });
@@ -82,9 +88,6 @@ const PostInput: NextPage = () => {
   const addEmoji = (event: React.MouseEvent, emojiObject: IEmojiData) => {
     setTextInput((prevText) => prevText + emojiObject.emoji);
   };
-
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>{error.message}</div>;
 
   return (
     <section className={`${styles.input} ${theme === 'light' && styles.light}`}>
@@ -132,6 +135,7 @@ const PostInput: NextPage = () => {
                 <input
                   type='file'
                   hidden
+                  accept='.jpg,.jpeg,.png'
                   onChange={addImageToPost}
                   ref={imagePickerRef}
                 />
