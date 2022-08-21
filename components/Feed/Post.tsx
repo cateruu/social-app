@@ -94,14 +94,17 @@ const Post: NextPage<Post> = ({ id, post, postPage }) => {
           </div>
         )}
         <div className={styles.actionsContainer}>
-          <div className={styles.iconContainer}>
-            <AiOutlineHeart
-              onClick={(e: MouseEvent) => {
-                e.stopPropagation();
-                likePost();
-              }}
-            />
-            <span className={styles.amount}>777</span>
+          <div
+            className={`${styles.iconContainer} ${liked && styles.liked}`}
+            onClick={(e: MouseEvent) => {
+              e.stopPropagation();
+              likePost();
+            }}
+          >
+            {liked ? <AiFillHeart /> : <AiOutlineHeart />}
+            {likesArr.length > 0 && (
+              <span className={styles.amount}>{likesArr.length}</span>
+            )}
           </div>
           <div className={styles.iconContainer}>
             <FaRegComment />

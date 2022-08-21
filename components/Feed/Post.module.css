@@ -95,6 +95,10 @@
   color: var(--blue-bg);
 }
 
+.liked {
+  color: var(--icon-active);
+}
+
 .amount {
   margin-left: 5px;
   font-size: 0.8rem;
