@@ -29,10 +29,30 @@
   width: 100%;
 }
 
+.usernameContainer {
+  display: flex;
+  align-items: center;
+}
+
 .username {
   margin: 0;
   font-weight: 600;
-  margin-top: 5px;
+  display: flex;
+}
+
+.username::after {
+  content: '.';
+  margin: 0 5px;
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: var(--placeholder);
+}
+
+.time {
+  font-weight: 400;
+  font-size: 0.7rem;
+  color: var(--placeholder);
 }
 
 .text {

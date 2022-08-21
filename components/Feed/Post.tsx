@@ -1,11 +1,11 @@
-import {
-  deleteDoc,
-  doc,
-  DocumentSnapshot,
-  QueryDocumentSnapshot,
-} from 'firebase/firestore';
+import { MouseEvent, useEffect, useState } from 'react';
+
+import { deleteDoc, doc, setDoc } from 'firebase/firestore';
+import { db } from '../../config/firebase';
 import { NextPage } from 'next';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
+
 import styles from './Post.module.css';
 
 import { PostType } from './Feed';
@@ -16,9 +16,7 @@ import { FiTrash2 } from 'react-icons/fi';
 
 import { useTheme } from '../../store/theme-context';
 import { useUser } from '@auth0/nextjs-auth0';
-import { MouseEvent } from 'react';
-import { db } from '../../config/firebase';
-import { useRouter } from 'next/router';
+import Moment from 'react-moment';
 
 interface Post {
   id: string;
@@ -31,6 +29,24 @@ const Post: NextPage<Post> = ({ id, post, postPage }) => {
   const router = useRouter();
 
   const { user, error, isLoading } = useUser();
+
+  const [liked, setLiked] = useState<boolean>(false);
+  const [likesArr, setLikesArr] = useState<[]>([]);
+
+  useEffect(
+    () => setLiked(likesArr.findIndex((like) => user?.sub === like.id) !== -1),
+    [likesArr, user]
+  );
+
+  const likePost = async () => {
+    if (liked) {
+      await deleteDoc(doc(db, 'posts', id, 'likes', user?.sub));
+    } else {
+      await setDoc(doc(db, 'posts', id, 'likes', user?.sub), {
+        username: user?.nickname,
+      });
+    }
+  };
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>{error.message}</div>;
@@ -47,7 +63,12 @@ const Post: NextPage<Post> = ({ id, post, postPage }) => {
         />
       </div>
       <div className={styles.container}>
-        <h4 className={styles.username}>{post.username}</h4>
+        <div className={styles.usernameContainer}>
+          <h4 className={styles.username}>{post.username}</h4>
+          <Moment fromNow className={styles.time}>
+            {post.timestamp.toDate()}
+          </Moment>
+        </div>
         <p className={styles.text}>{post.text}</p>
         {post.image && (
           <div className={styles.imageContainer}>
@@ -61,14 +82,19 @@ const Post: NextPage<Post> = ({ id, post, postPage }) => {
         )}
         <div className={styles.actionsContainer}>
           <div className={styles.iconContainer}>
-            <AiOutlineHeart />
+            <AiOutlineHeart
+              onClick={(e: MouseEvent) => {
+                e.stopPropagation();
+                likePost();
+              }}
+            />
             <span className={styles.amount}>777</span>
           </div>
           <div className={styles.iconContainer}>
             <FaRegComment />
             <span className={styles.amount}>777</span>
           </div>
-          {user?.sub === post.id && (
+          {user?.sub === post?.id && (
             <div className={`${styles.iconContainer} ${styles.delete}`}>
               <FiTrash2
                 onClick={(e: MouseEvent) => {
