@@ -1,6 +1,13 @@
 import { MouseEvent, useEffect, useState } from 'react';
 
-import { deleteDoc, doc, setDoc } from 'firebase/firestore';
+import {
+  collection,
+  deleteDoc,
+  doc,
+  DocumentData,
+  onSnapshot,
+  setDoc,
+} from 'firebase/firestore';
 import { db } from '../../config/firebase';
 import { NextPage } from 'next';
 import Image from 'next/image';
@@ -31,7 +38,13 @@ const Post: NextPage<Post> = ({ id, post, postPage }) => {
   const { user, error, isLoading } = useUser();
 
   const [liked, setLiked] = useState<boolean>(false);
-  const [likesArr, setLikesArr] = useState<[]>([]);
+  const [likesArr, setLikesArr] = useState<DocumentData[]>([]);
+
+  useEffect(() => {
+    onSnapshot(collection(db, 'posts', id, 'likes'), (snapshot) => {
+      setLikesArr(snapshot.docs);
+    });
+  }, [id]);
 
   useEffect(
     () => setLiked(likesArr.findIndex((like) => user?.sub === like.id) !== -1),
@@ -66,7 +79,7 @@ const Post: NextPage<Post> = ({ id, post, postPage }) => {
         <div className={styles.usernameContainer}>
           <h4 className={styles.username}>{post.username}</h4>
           <Moment fromNow className={styles.time}>
-            {post.timestamp.toDate()}
+            {post?.timestamp.toDate()}
           </Moment>
         </div>
         <p className={styles.text}>{post.text}</p>
