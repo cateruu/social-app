@@ -55,8 +55,6 @@ const PostInput: NextPage<InputType> = ({ type, id }) => {
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>{error.message}</div>;
 
-  console.log(id);
-
   const sendPost = async () => {
     if (loading) return;
     setLoading(true);

@@ -43,10 +43,17 @@ const Post: NextPage<Post> = ({ id, post }) => {
 
   const [liked, setLiked] = useState<boolean>(false);
   const [likesArr, setLikesArr] = useState<DocumentData[]>([]);
+  const [commentsArr, setCommentsArr] = useState<DocumentData[]>([]);
 
   useEffect(() => {
     onSnapshot(collection(db, 'posts', id, 'likes'), (snapshot) => {
       setLikesArr(snapshot.docs);
+    });
+  }, [id]);
+
+  useEffect(() => {
+    onSnapshot(collection(db, 'posts', id, 'comments'), (snapshot) => {
+      setCommentsArr(snapshot.docs);
     });
   }, [id]);
 
@@ -129,7 +136,9 @@ const Post: NextPage<Post> = ({ id, post }) => {
             }
           >
             <FaRegComment />
-            <span className={styles.amount}>777</span>
+            {commentsArr.length > 0 && (
+              <span className={styles.amount}>{commentsArr.length}</span>
+            )}
           </div>
           {user?.sub === post?.id && (
             <div className={`${styles.iconContainer} ${styles.delete}`}>
