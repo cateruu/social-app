@@ -31,6 +31,7 @@ const CommentModal = () => {
               height={50}
               className={styles.profilePic}
             />
+            <div className={styles.line}></div>
           </div>
           <div className={styles.container}>
             <div className={styles.usernameContainer}>

@@ -44,10 +44,23 @@
 
 .profilePicContainer {
   margin: 10px 10px 0 0;
+  position: relative;
 }
 
 .profilePic {
   border-radius: 50%;
+  z-index: 20;
+}
+
+.line {
+  height: calc(100% - 55px);
+  width: 2px;
+  background-color: var(--placeholder);
+  position: absolute;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 10px;
 }
 
 .container {
