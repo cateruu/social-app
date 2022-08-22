@@ -87,7 +87,7 @@ const Post: NextPage<Post> = ({ id, post, postPage }) => {
         <div className={styles.usernameContainer}>
           <h4 className={styles.username}>{post.username}</h4>
           <Moment fromNow className={styles.time}>
-            {post?.timestamp.toDate()}
+            {post?.timestamp?.toDate()}
           </Moment>
         </div>
         <p className={styles.text}>{post.text}</p>

@@ -58,7 +58,6 @@
   position: absolute;
   top: 5px;
   left: 5px;
-  font-size: 2rem;
   cursor: pointer;
   color: var(--text-color);
   background-color: var(--main-bg);
@@ -129,4 +128,9 @@
 
 .lightText {
   color: var(--text-color-light);
+}
+
+.reply {
+  padding: 0;
+  border: none;
 }

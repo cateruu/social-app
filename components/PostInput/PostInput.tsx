@@ -78,6 +78,8 @@ const PostInput: NextPage<InputType> = ({ type }) => {
     setShowEmojis(false);
   };
 
+  const sendComment = async () => {};
+
   const addImageToPost = (e: BaseSyntheticEvent) => {
     const reader = new FileReader();
     if (e.target.files[0]) {
@@ -94,10 +96,14 @@ const PostInput: NextPage<InputType> = ({ type }) => {
   };
 
   return (
-    <section className={`${styles.input} ${theme === 'light' && styles.light}`}>
+    <section
+      className={`${styles.input} ${theme === 'light' && styles.light} ${
+        type === 'comment' && styles.reply
+      }`}
+    >
       <div className={styles.avatarContainer}>
         <Image
-          src={user?.picture}
+          src={user?.picture!}
           alt='avatar'
           width={50}
           height={50}
@@ -110,7 +116,7 @@ const PostInput: NextPage<InputType> = ({ type }) => {
             type === 'post'
               ? 'Tell me something...'
               : type === 'comment'
-              ? 'Your reply.'
+              ? 'Your reply'
               : ''
           }
           maxRows={10}
@@ -163,7 +169,13 @@ const PostInput: NextPage<InputType> = ({ type }) => {
             <button
               className={styles.button}
               disabled={!textInput.trim() && !selectedImage}
-              onClick={sendPost}
+              onClick={
+                type === 'post'
+                  ? sendPost
+                  : type === 'comment'
+                  ? sendComment
+                  : null
+              }
             >
               {type === 'post' && 'Post'}
               {type === 'comment' && 'Reply'}
