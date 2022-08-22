@@ -17,6 +17,9 @@ import {
 } from '@firebase/firestore';
 import { getDownloadURL, ref, uploadString } from '@firebase/storage';
 
+import { useAppDispatch } from '../../app/hooks';
+import { closeCommentModal } from '../../features/commentModalSlice';
+
 import TextareaAutosize from 'react-textarea-autosize';
 import { BsCardImage, BsEmojiSmile } from 'react-icons/bs';
 import { IoMdClose } from 'react-icons/io';
@@ -33,12 +36,15 @@ const Picker = dynamic(
 
 type InputType = {
   type: string;
+  id?: string;
 };
 
-const PostInput: NextPage<InputType> = ({ type }) => {
+const PostInput: NextPage<InputType> = ({ type, id }) => {
   const { theme } = useTheme();
 
   const { user, error, isLoading } = useUser();
+
+  const dispatch = useAppDispatch();
 
   const [textInput, setTextInput] = useState<string>('');
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
@@ -48,6 +54,8 @@ const PostInput: NextPage<InputType> = ({ type }) => {
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>{error.message}</div>;
+
+  console.log(id);
 
   const sendPost = async () => {
     if (loading) return;
@@ -78,7 +86,32 @@ const PostInput: NextPage<InputType> = ({ type }) => {
     setShowEmojis(false);
   };
 
-  const sendComment = async () => {};
+  const sendComment = async () => {
+    console.log(id);
+    const docRef = await addDoc(collection(db, 'posts', id!, 'comments'), {
+      comment: textInput,
+      username: user?.nickname,
+      id: user?.sub,
+      profilePic: user?.picture,
+      timestamp: serverTimestamp(),
+    });
+
+    const imageRef = ref(storage, `posts/comments/${docRef.id}/image`);
+
+    if (selectedImage) {
+      await uploadString(imageRef, selectedImage, 'data_url').then(async () => {
+        const downloadUrl = await getDownloadURL(imageRef);
+        await updateDoc(doc(db, 'posts', id!, 'comments', docRef.id), {
+          image: downloadUrl,
+        });
+      });
+    }
+
+    dispatch(closeCommentModal());
+    setTextInput('');
+    setSelectedImage(null);
+    setShowEmojis(false);
+  };
 
   const addImageToPost = (e: BaseSyntheticEvent) => {
     const reader = new FileReader();
@@ -174,7 +207,7 @@ const PostInput: NextPage<InputType> = ({ type }) => {
                   ? sendPost
                   : type === 'comment'
                   ? sendComment
-                  : null
+                  : undefined
               }
             >
               {type === 'post' && 'Post'}

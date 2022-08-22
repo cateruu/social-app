@@ -30,10 +30,10 @@ import { openCommentModal } from '../../features/commentModalSlice';
 interface Post {
   id: string;
   post: PostType;
-  postPage: any;
+  postPage?: any;
 }
 
-const Post: NextPage<Post> = ({ id, post, postPage }) => {
+const Post: NextPage<Post> = ({ id, post }) => {
   const { theme } = useTheme();
   const router = useRouter();
 
@@ -58,9 +58,9 @@ const Post: NextPage<Post> = ({ id, post, postPage }) => {
   const likePost = async () => {
     if (user) {
       if (liked) {
-        await deleteDoc(doc(db, 'posts', id, 'likes', user?.sub));
+        await deleteDoc(doc(db, 'posts', id!, 'likes', user?.sub!));
       } else {
-        await setDoc(doc(db, 'posts', id, 'likes', user?.sub), {
+        await setDoc(doc(db, 'posts', id!, 'likes', user?.sub!), {
           username: user?.nickname,
         });
       }
@@ -123,6 +123,7 @@ const Post: NextPage<Post> = ({ id, post, postPage }) => {
                     ...post,
                     timestamp: post.timestamp.toDate().getTime(),
                   },
+                  postId: id,
                 })
               )
             }

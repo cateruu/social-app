@@ -117,11 +117,6 @@
   cursor: default;
 }
 
-.fake {
-  filter: contrast(0.5);
-  cursor: not-allowed;
-}
-
 .light {
   border-color: var(--border-color-light);
 }

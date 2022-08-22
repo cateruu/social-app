@@ -3,12 +3,14 @@ import { PostType } from '../components/Feed/Feed';
 
 type CommentType = {
   isOpen: boolean;
-  postInfo: PostType | null;
+  postInfo: PostType | undefined;
+  postId: string | undefined;
 };
 
 const initialState: CommentType = {
   isOpen: false,
-  postInfo: null,
+  postInfo: undefined,
+  postId: undefined,
 };
 
 const commentModalSlice = createSlice({
@@ -18,10 +20,13 @@ const commentModalSlice = createSlice({
     openCommentModal: (state, { payload }) => {
       state.isOpen = true;
       state.postInfo = payload.post;
+      state.postId = payload.postId;
       document.body.style.overflow = 'hidden';
     },
     closeCommentModal: (state) => {
       state.isOpen = false;
+      state.postInfo = undefined;
+      state.postId = undefined;
       document.body.style.overflow = 'auto';
     },
   },

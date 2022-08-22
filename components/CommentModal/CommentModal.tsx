@@ -12,7 +12,7 @@ import PostInput from '../PostInput/PostInput';
 
 const CommentModal = () => {
   const dispatch = useAppDispatch();
-  const { postInfo } = useAppSelector((state) => state.commentModal);
+  const { postInfo, postId } = useAppSelector((state) => state.commentModal);
 
   return (
     <>
@@ -60,7 +60,7 @@ const CommentModal = () => {
             <p className={styles.replying}>Replying to {postInfo?.username}</p>
           </div>
         </div>
-        <PostInput type='comment' />
+        <PostInput type='comment' id={postId} />
       </div>
     </>
   );
