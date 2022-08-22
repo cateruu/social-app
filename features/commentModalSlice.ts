@@ -18,9 +18,11 @@ const commentModalSlice = createSlice({
     openCommentModal: (state, { payload }) => {
       state.isOpen = true;
       state.postInfo = payload.post;
+      document.body.style.overflow = 'hidden';
     },
     closeCommentModal: (state) => {
       state.isOpen = false;
+      document.body.style.overflow = 'auto';
     },
   },
 });

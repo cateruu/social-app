@@ -1,11 +1,13 @@
+import Image from 'next/image';
+
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { closeCommentModal } from '../../features/commentModalSlice';
 
 import styles from './CommentModal.module.css';
 
 import { IoMdClose } from 'react-icons/io';
-import Image from 'next/image';
 import Moment from 'react-moment';
+
 import PostInput from '../PostInput/PostInput';
 
 const CommentModal = () => {
