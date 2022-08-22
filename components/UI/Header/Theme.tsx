@@ -2,7 +2,7 @@ import { NextPage } from 'next';
 
 import styles from './Theme.module.css';
 
-import { useTheme } from '../../../store/theme-context';
+import { useTheme } from '../../../app/theme-context';
 
 import { BsFillMoonFill, BsFillSunFill } from 'react-icons/bs';
 

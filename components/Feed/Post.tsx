@@ -21,9 +21,11 @@ import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
 import { FaRegComment } from 'react-icons/fa';
 import { FiTrash2 } from 'react-icons/fi';
 
-import { useTheme } from '../../store/theme-context';
+import { useTheme } from '../../app/theme-context';
 import { useUser } from '@auth0/nextjs-auth0';
 import Moment from 'react-moment';
+import { useAppDispatch } from '../../app/hooks';
+import { openCommentModal } from '../../features/commentModalSlice';
 
 interface Post {
   id: string;
@@ -34,6 +36,8 @@ interface Post {
 const Post: NextPage<Post> = ({ id, post, postPage }) => {
   const { theme } = useTheme();
   const router = useRouter();
+
+  const dispatch = useAppDispatch();
 
   const { user, error, isLoading } = useUser();
 
@@ -110,7 +114,19 @@ const Post: NextPage<Post> = ({ id, post, postPage }) => {
               <span className={styles.amount}>{likesArr.length}</span>
             )}
           </div>
-          <div className={styles.iconContainer}>
+          <div
+            className={styles.iconContainer}
+            onClick={() =>
+              dispatch(
+                openCommentModal({
+                  post: {
+                    ...post,
+                    timestamp: post.timestamp.toDate().getTime(),
+                  },
+                })
+              )
+            }
+          >
             <FaRegComment />
             <span className={styles.amount}>777</span>
           </div>

@@ -1,4 +1,4 @@
-import { useTheme } from '../../store/theme-context';
+import { useTheme } from '../../app/theme-context';
 
 import styles from './Layout.module.css';
 

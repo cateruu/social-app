@@ -4,7 +4,7 @@ import { useUser } from '@auth0/nextjs-auth0';
 
 import styles from './Header.module.css';
 
-import { useTheme } from '../../../store/theme-context';
+import { useTheme } from '../../../app/theme-context';
 
 import Theme from './Theme';
 

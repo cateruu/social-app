@@ -7,3 +7,6 @@ export const store = configureStore({
     commentModal: CommentModalReducer,
   },
 });
+
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;

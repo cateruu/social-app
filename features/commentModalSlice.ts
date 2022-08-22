@@ -1,25 +1,30 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { PostType } from '../components/Feed/Feed';
 
 type CommentType = {
   isOpen: boolean;
+  postInfo: PostType | null;
 };
 
 const initialState: CommentType = {
   isOpen: false,
+  postInfo: null,
 };
 
 const commentModalSlice = createSlice({
   name: 'comment',
   initialState,
   reducers: {
-    openModal: (state) => {
+    openCommentModal: (state, { payload }) => {
       state.isOpen = true;
+      state.postInfo = payload.post;
     },
-    closeModal: (state) => {
+    closeCommentModal: (state) => {
       state.isOpen = false;
     },
   },
 });
 
-export const { openModal, closeModal } = commentModalSlice.actions;
+export const { openCommentModal, closeCommentModal } =
+  commentModalSlice.actions;
 export default commentModalSlice.reducer;

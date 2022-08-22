@@ -3,11 +3,11 @@ import { useEffect, useState } from 'react';
 import {
   collection,
   CollectionReference,
-  FieldValue,
   onSnapshot,
   orderBy,
   query,
   QueryDocumentSnapshot,
+  Timestamp,
 } from 'firebase/firestore';
 import { db } from '../../config/firebase';
 
@@ -20,7 +20,7 @@ export interface PostType {
   image: string;
   profilePic: string;
   text: string;
-  timestamp: Date;
+  timestamp: Timestamp;
   username: string;
 }
 

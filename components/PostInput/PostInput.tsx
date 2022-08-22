@@ -3,7 +3,7 @@ import { NextPage } from 'next';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
 
-import { useTheme } from '../../store/theme-context';
+import { useTheme } from '../../app/theme-context';
 
 import styles from './PostInput.module.css';
 
@@ -19,7 +19,7 @@ import { getDownloadURL, ref, uploadString } from '@firebase/storage';
 
 import TextareaAutosize from 'react-textarea-autosize';
 import { BsCardImage, BsEmojiSmile } from 'react-icons/bs';
-import { MdCancel } from 'react-icons/md';
+import { IoMdClose } from 'react-icons/io';
 import { IconContext } from 'react-icons';
 import { IEmojiData } from 'emoji-picker-react';
 import { useUser } from '@auth0/nextjs-auth0';
@@ -31,7 +31,11 @@ const Picker = dynamic(
   { ssr: false }
 );
 
-const PostInput: NextPage = () => {
+type InputType = {
+  type: string;
+};
+
+const PostInput: NextPage<InputType> = ({ type }) => {
   const { theme } = useTheme();
 
   const { user, error, isLoading } = useUser();
@@ -102,7 +106,13 @@ const PostInput: NextPage = () => {
       </div>
       <div className={styles.textContainer}>
         <TextareaAutosize
-          placeholder='Tell me something...'
+          placeholder={
+            type === 'post'
+              ? 'Tell me something...'
+              : type === 'comment'
+              ? 'Your reply.'
+              : ''
+          }
           maxRows={10}
           value={textInput}
           onChange={(e) => setTextInput(e.target.value)}
@@ -117,9 +127,9 @@ const PostInput: NextPage = () => {
               alt='user image'
               className={styles.selectedImage}
             />
-            <IconContext.Provider value={{ className: styles.deleteImage }}>
-              <MdCancel onClick={() => setSelectedImage(null)} />
-            </IconContext.Provider>
+            <div className={styles.deleteImage}>
+              <IoMdClose onClick={() => setSelectedImage(null)} />
+            </div>
           </div>
         )}
         {!loading && (
@@ -155,7 +165,8 @@ const PostInput: NextPage = () => {
               disabled={!textInput.trim() && !selectedImage}
               onClick={sendPost}
             >
-              Post
+              {type === 'post' && 'Post'}
+              {type === 'comment' && 'Reply'}
             </button>
           </div>
         )}

@@ -3,9 +3,9 @@ import '../styles/emoji-picker.css';
 import type { AppProps } from 'next/app';
 
 import { UserProvider } from '@auth0/nextjs-auth0';
-import ThemeContextProvider from '../store/theme-context';
+import ThemeContextProvider from '../app/theme-context';
 import { Provider } from 'react-redux';
-import { store } from '../store/store';
+import { store } from '../app/store';
 
 import Layout from '../components/Layout/Layout';
 

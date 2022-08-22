@@ -60,7 +60,19 @@
   left: 5px;
   font-size: 2rem;
   cursor: pointer;
-  color: var(--border-color);
+  color: var(--text-color);
+  background-color: var(--main-bg);
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  font-size: 1rem;
+  text-align: center;
+  line-height: 35px;
+  transition: 0.1s;
+}
+
+.deleteImage:hover {
+  background-color: var(--border-color);
 }
 
 .buttons {
@@ -92,7 +104,6 @@
   background-color: var(--blue-bg);
   border-radius: 10px;
   padding: 3px 20px;
-  width: 80px;
   outline: none;
   border: none;
   cursor: pointer;
