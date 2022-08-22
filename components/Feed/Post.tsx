@@ -52,12 +52,16 @@ const Post: NextPage<Post> = ({ id, post, postPage }) => {
   );
 
   const likePost = async () => {
-    if (liked) {
-      await deleteDoc(doc(db, 'posts', id, 'likes', user?.sub));
+    if (user) {
+      if (liked) {
+        await deleteDoc(doc(db, 'posts', id, 'likes', user?.sub));
+      } else {
+        await setDoc(doc(db, 'posts', id, 'likes', user?.sub), {
+          username: user?.nickname,
+        });
+      }
     } else {
-      await setDoc(doc(db, 'posts', id, 'likes', user?.sub), {
-        username: user?.nickname,
-      });
+      console.error('please login');
     }
   };
 
