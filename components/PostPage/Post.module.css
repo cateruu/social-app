@@ -55,3 +55,8 @@
   position: relative !important;
   height: unset !important;
 }
+
+.date {
+  font-size: 0.8rem;
+  color: var(--placeholder);
+}

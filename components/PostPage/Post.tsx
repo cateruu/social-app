@@ -22,9 +22,35 @@ const Post = ({ post, id }: Post) => {
   const router = useRouter();
   const { user, error, isLoading } = useUser();
 
+  const postCreationTime = () => {
+    const monthNames = [
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec',
+    ];
+    const date = post.timestamp.toDate();
+
+    const day = date.getDate();
+    const month = monthNames[date.getMonth()];
+    const year = date.getFullYear();
+    const hour = date.getHours();
+    const minutes = date.getMinutes();
+
+    return <p>{`${hour}:${minutes} ${month} ${day}, ${year}`}</p>;
+  };
+
   return (
-    <section className={styles.post}>
-      <div className={styles.header}>
+    <article className={styles.post}>
+      <section className={styles.header}>
         <div className={styles.userInfo}>
           <Image
             src={post.profilePic}
@@ -46,8 +72,8 @@ const Post = ({ post, id }: Post) => {
             />
           </div>
         )}
-      </div>
-      <div className={styles.container}>
+      </section>
+      <section className={styles.container}>
         <p className={styles.text}>{post.text}</p>
         {post.image && (
           <div className={styles.imageContainer}>
@@ -59,8 +85,9 @@ const Post = ({ post, id }: Post) => {
             />
           </div>
         )}
-      </div>
-    </section>
+      </section>
+      <section className={styles.date}>{postCreationTime()}</section>
+    </article>
   );
 };
 
