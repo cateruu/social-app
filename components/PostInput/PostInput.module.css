@@ -119,6 +119,7 @@
 
 .light {
   border-color: var(--border-color-light);
+  color: var(--text-color-light);
 }
 
 .lightText {

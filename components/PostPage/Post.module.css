@@ -91,3 +91,12 @@
   margin-left: 5px;
   font-size: 0.8rem;
 }
+
+.light {
+  border-color: var(--border-color-light);
+  color: var(--text-color-light);
+}
+
+.lightDate {
+  border-color: var(--border-color-light);
+}

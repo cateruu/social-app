@@ -13,8 +13,14 @@ import Post from '../../components/PostPage/Post';
 import BackHome from '../../components/PostPage/BackHome';
 import PostInput from '../../components/PostInput/PostInput';
 import Comments from '../../components/PostPage/Comments';
+import { useTheme } from '../../app/theme-context';
+import { useUser } from '@auth0/nextjs-auth0';
 
 const PostPage = () => {
+  const { theme } = useTheme();
+
+  const { user, error, isLoading } = useUser();
+
   const router = useRouter();
   const { id } = router.query;
 
@@ -42,8 +48,19 @@ const PostPage = () => {
       <BackHome />
       {!post && <div>Loading...</div>}
       {post && <Post post={post} id={id as string} />}
-      <section className={styles.input}>
-        <PostInput type='comment' id={id as string} />
+      <section
+        className={`${styles.input} ${theme === 'light' && styles.light}`}
+      >
+        {user && <PostInput type='comment' id={id as string} />}
+        {!user && (
+          <p
+            className={`${styles.info} ${
+              theme === 'light' && styles.lightInfo
+            }`}
+          >
+            Login to reply
+          </p>
+        )}
       </section>
       <Comments id={id as string} />
     </>

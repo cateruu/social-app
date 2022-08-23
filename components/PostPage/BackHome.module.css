@@ -12,3 +12,11 @@
 .back:hover {
   background-color: var(--border-color);
 }
+
+.light {
+  color: var(--text-color-light);
+}
+
+.light:hover {
+  background-color: var(--border-color-light);
+}

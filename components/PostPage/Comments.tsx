@@ -16,6 +16,7 @@ import styles from './Comments.module.css';
 import { uuid } from 'uuidv4';
 
 import Comment from './Comment';
+import { useTheme } from '../../app/theme-context';
 
 export type Comment = {
   id: string;
@@ -31,6 +32,8 @@ type Props = {
 };
 
 const Comments = ({ id }: Props) => {
+  const { theme } = useTheme();
+
   const [comments, setComments] = useState<
     QueryDocumentSnapshot<Comment>[] | null
   >(null);
@@ -55,7 +58,9 @@ const Comments = ({ id }: Props) => {
   );
 
   return (
-    <section className={styles.comments}>
+    <section
+      className={`${styles.comments} ${theme === 'light' && styles.light}`}
+    >
       {comments?.map((comment) => (
         <Comment key={uuid()} content={comment.data()} />
       ))}

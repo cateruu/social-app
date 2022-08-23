@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Moment from 'react-moment';
+import { useTheme } from '../../app/theme-context';
 import styles from './Comment.module.css';
 
 import { Comment } from './Comments';
@@ -9,8 +10,10 @@ type Props = {
 };
 
 const Comment = ({ content }: Props) => {
+  const { theme } = useTheme();
+
   return (
-    <div className={styles.comment}>
+    <div className={`${styles.comment} ${theme === 'light' && styles.light}`}>
       <div className={styles.avatarContainer}>
         <Image
           src={content.profilePic}

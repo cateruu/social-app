@@ -3,3 +3,18 @@
   border-top: none;
   padding: 10px 20px;
 }
+
+.info {
+  text-align: center;
+  font-size: 1.4rem;
+  color: var(--text-color);
+  margin: 0;
+}
+
+.lightInfo {
+  color: var(--text-color-light);
+}
+
+.light {
+  border-color: var(--border-color-light);
+}

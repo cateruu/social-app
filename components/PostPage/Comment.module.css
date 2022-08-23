@@ -69,3 +69,8 @@
   position: relative !important;
   height: unset !important;
 }
+
+.light {
+  border-color: var(--border-color-light);
+  color: var(--text-color-light);
+}

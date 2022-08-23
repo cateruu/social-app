@@ -22,6 +22,7 @@ import { FiTrash2 } from 'react-icons/fi';
 
 import { postCreationTime } from '../../utils/postCreationTime';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
+import { useTheme } from '../../app/theme-context';
 
 type Post = {
   post: PostType;
@@ -29,6 +30,8 @@ type Post = {
 };
 
 const Post = ({ post, id }: Post) => {
+  const { theme } = useTheme();
+
   const router = useRouter();
   const { user, error, isLoading } = useUser();
 
@@ -64,7 +67,7 @@ const Post = ({ post, id }: Post) => {
   if (error) return <div>{error.message}</div>;
 
   return (
-    <article className={styles.post}>
+    <article className={`${styles.post} ${theme === 'light' && styles.light}`}>
       <section className={styles.header}>
         <div className={styles.userInfo}>
           <Image
@@ -101,7 +104,9 @@ const Post = ({ post, id }: Post) => {
           </div>
         )}
       </section>
-      <section className={styles.date}>
+      <section
+        className={`${styles.date} ${theme === 'light' && styles.lightDate}`}
+      >
         {postCreationTime(post.timestamp)}
       </section>
       <section className={styles.buttons}>

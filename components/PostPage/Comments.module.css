@@ -1,4 +1,10 @@
 .comments {
   border: 1px solid var(--border-color);
   border-top: none;
+  border-bottom: none;
+  margin-bottom: 20px;
+}
+
+.light {
+  border-color: var(--border-color-light);
 }
