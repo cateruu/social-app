@@ -29,7 +29,7 @@ const PostPage = () => {
   return (
     <>
       <BackHome />
-      {post && <Post post={post} />}
+      {post && <Post post={post} id={id as string} />}
     </>
   );
 };

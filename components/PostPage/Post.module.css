@@ -1,0 +1,39 @@
+.post {
+  margin-top: 20px;
+  border: 1px solid var(--border-color);
+  border-radius: 10px 10px 0 0;
+  padding: 10px 20px;
+  display: flex;
+  flex-direction: column;
+  color: var(--text-color);
+}
+
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+}
+
+.profilePic {
+  border-radius: 50%;
+}
+
+.username {
+  margin: 0 0 0 10px;
+}
+
+.delete {
+  color: var(--placeholder);
+  cursor: pointer;
+  transition: 0.1s;
+}
+
+.delete:hover {
+  color: var(--icon-active);
+}
