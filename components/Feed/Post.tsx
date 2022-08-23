@@ -80,7 +80,10 @@ const Post: NextPage<Post> = ({ id, post }) => {
   if (error) return <div>{error.message}</div>;
 
   return (
-    <section className={`${styles.post} ${theme === 'light' && styles.light}`}>
+    <section
+      className={`${styles.post} ${theme === 'light' && styles.light}`}
+      onClick={() => router.push(`/${id}`)}
+    >
       <div className={styles.profilePicContainer}>
         <Image
           src={post.profilePic}

@@ -2,6 +2,7 @@ import React, { BaseSyntheticEvent, useRef, useState } from 'react';
 import { NextPage } from 'next';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
 
 import { useTheme } from '../../app/theme-context';
 
@@ -41,6 +42,7 @@ type InputType = {
 
 const PostInput: NextPage<InputType> = ({ type, id }) => {
   const { theme } = useTheme();
+  const router = useRouter();
 
   const { user, error, isLoading } = useUser();
 
@@ -109,6 +111,8 @@ const PostInput: NextPage<InputType> = ({ type, id }) => {
     setTextInput('');
     setSelectedImage(null);
     setShowEmojis(false);
+
+    router.push(`/${id}`);
   };
 
   const addImageToPost = (e: BaseSyntheticEvent) => {
