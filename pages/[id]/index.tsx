@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
+import Router, { useRouter } from 'next/router';
 
 import { doc, DocumentReference, onSnapshot } from 'firebase/firestore';
 import { db } from '../../config/firebase';
