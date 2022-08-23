@@ -47,6 +47,19 @@ const Post = ({ post, id }: Post) => {
           </div>
         )}
       </div>
+      <div className={styles.container}>
+        <p className={styles.text}>{post.text}</p>
+        {post.image && (
+          <div className={styles.imageContainer}>
+            <Image
+              src={post.image}
+              alt={post.username}
+              layout='fill'
+              className={styles.image}
+            />
+          </div>
+        )}
+      </div>
     </section>
   );
 };
