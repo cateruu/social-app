@@ -20,7 +20,8 @@
     "react-icons": "^4.4.0",
     "react-moment": "^1.1.2",
     "react-redux": "^8.0.2",
-    "react-textarea-autosize": "^8.3.4"
+    "react-textarea-autosize": "^8.3.4",
+    "uuidv4": "^6.2.13"
   },
   "devDependencies": {
     "@types/node": "18.7.5",

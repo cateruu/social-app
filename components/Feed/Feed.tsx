@@ -44,12 +44,7 @@ const Feed = () => {
   return (
     <section className={styles.feed}>
       {posts?.map((post) => (
-        <Post
-          key={post.id}
-          id={post.id}
-          post={post.data()}
-          postPage={post.id}
-        />
+        <Post key={post.id} id={post.id} post={post.data()} />
       ))}
     </section>
   );

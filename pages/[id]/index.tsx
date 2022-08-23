@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 
 import { doc, DocumentReference, onSnapshot } from 'firebase/firestore';
@@ -11,6 +12,7 @@ import Post from '../../components/PostPage/Post';
 
 import BackHome from '../../components/PostPage/BackHome';
 import PostInput from '../../components/PostInput/PostInput';
+import Comments from '../../components/PostPage/Comments';
 
 const PostPage = () => {
   const router = useRouter();
@@ -31,12 +33,19 @@ const PostPage = () => {
 
   return (
     <>
+      <Head>
+        <title>
+          {post?.username} on Social: {`"${post?.text}"`}
+        </title>
+        <meta name='description' content='Post page on Social app' />
+      </Head>
       <BackHome />
       {!post && <div>Loading...</div>}
       {post && <Post post={post} id={id as string} />}
       <section className={styles.input}>
-        <PostInput type='comment' />
+        <PostInput type='comment' id={id as string} />
       </section>
+      <Comments id={id as string} />
     </>
   );
 };

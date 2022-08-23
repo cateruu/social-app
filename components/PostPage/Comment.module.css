@@ -1,0 +1,71 @@
+.comment {
+  width: 100%;
+  padding: 10px 20px;
+  display: flex;
+  color: var(--text-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.avatarContainer {
+  margin-right: 10px;
+}
+
+.profilePic {
+  border-radius: 50%;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+}
+
+.usernameContainer {
+  display: flex;
+  align-items: center;
+}
+
+.username {
+  margin: 0;
+  font-weight: 600;
+  display: flex;
+}
+
+.username::after {
+  content: '.';
+  margin: 0 5px;
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: var(--placeholder);
+}
+
+.time {
+  font-weight: 400;
+  font-size: 0.7rem;
+  color: var(--placeholder);
+}
+
+.text {
+  margin: 10px 0 5px 0;
+  font-size: 0.9rem;
+}
+
+.imageContainer {
+  position: relative;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.imageContainer > span {
+  position: unset !important;
+}
+
+.image {
+  border-radius: 10px;
+  object-fit: contain;
+  width: 100% !important;
+  position: relative !important;
+  height: unset !important;
+}

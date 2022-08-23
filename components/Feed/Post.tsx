@@ -126,7 +126,8 @@ const Post: NextPage<Post> = ({ id, post }) => {
           </div>
           <div
             className={styles.iconContainer}
-            onClick={() =>
+            onClick={(e: MouseEvent) => {
+              e.stopPropagation();
               dispatch(
                 openCommentModal({
                   post: {
@@ -135,8 +136,8 @@ const Post: NextPage<Post> = ({ id, post }) => {
                   },
                   postId: id,
                 })
-              )
-            }
+              );
+            }}
           >
             <FaRegComment />
             {commentsArr.length > 0 && (
