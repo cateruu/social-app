@@ -5,7 +5,6 @@
   color: var(--text-color);
   border-radius: 10px;
   position: fixed;
-  top: 30px;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 0;
+  bottom: 100px;
 }

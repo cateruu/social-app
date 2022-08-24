@@ -15,9 +15,14 @@ import PostInput from '../../components/PostInput/PostInput';
 import Comments from '../../components/PostPage/Comments';
 import { useTheme } from '../../app/theme-context';
 import { useUser } from '@auth0/nextjs-auth0';
+import { AnimatePresence } from 'framer-motion';
+import { useAppSelector } from '../../app/hooks';
+import Error from '../../components/Error/Error';
 
 const PostPage = () => {
   const { theme } = useTheme();
+
+  const { errorOpen } = useAppSelector((state) => state.error);
 
   const { user, error, isLoading } = useUser();
 
@@ -37,6 +42,9 @@ const PostPage = () => {
     }
   }, [id]);
 
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>{error.message}</div>;
+
   return (
     <>
       <Head>
@@ -45,6 +53,7 @@ const PostPage = () => {
         </title>
         <meta name='description' content='Post page on Social app' />
       </Head>
+      <AnimatePresence>{errorOpen && <Error />}</AnimatePresence>
       <BackHome />
       {!post && <div>Loading...</div>}
       {post && <Post post={post} id={id as string} />}

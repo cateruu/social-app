@@ -26,6 +26,7 @@ import { useUser } from '@auth0/nextjs-auth0';
 import Moment from 'react-moment';
 import { useAppDispatch } from '../../app/hooks';
 import { openCommentModal } from '../../features/commentModalSlice';
+import { hideError, showError } from '../../features/errorSlice';
 
 interface Post {
   id: string;
@@ -72,7 +73,27 @@ const Post: NextPage<Post> = ({ id, post }) => {
         });
       }
     } else {
-      console.error('please login');
+      dispatch(showError({ text: 'Login to perform that action!' }));
+
+      setTimeout(() => dispatch(hideError()), 2000);
+    }
+  };
+
+  const commentHandler = () => {
+    if (user) {
+      dispatch(
+        openCommentModal({
+          post: {
+            ...post,
+            timestamp: post.timestamp.toDate().getTime(),
+          },
+          postId: id,
+        })
+      );
+    } else {
+      dispatch(showError({ text: 'Login to perform that action!' }));
+
+      setTimeout(() => dispatch(hideError()), 2000);
     }
   };
 
@@ -128,15 +149,7 @@ const Post: NextPage<Post> = ({ id, post }) => {
             className={styles.iconContainer}
             onClick={(e: MouseEvent) => {
               e.stopPropagation();
-              dispatch(
-                openCommentModal({
-                  post: {
-                    ...post,
-                    timestamp: post.timestamp.toDate().getTime(),
-                  },
-                  postId: id,
-                })
-              );
+              commentHandler();
             }}
           >
             <FaRegComment />

@@ -23,6 +23,8 @@ import { FiTrash2 } from 'react-icons/fi';
 import { postCreationTime } from '../../utils/postCreationTime';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import { useTheme } from '../../app/theme-context';
+import { useAppDispatch } from '../../app/hooks';
+import { hideError, showError } from '../../features/errorSlice';
 
 type Post = {
   post: PostType;
@@ -31,6 +33,8 @@ type Post = {
 
 const Post = ({ post, id }: Post) => {
   const { theme } = useTheme();
+
+  const dispatch = useAppDispatch();
 
   const router = useRouter();
   const { user, error, isLoading } = useUser();
@@ -59,7 +63,9 @@ const Post = ({ post, id }: Post) => {
         });
       }
     } else {
-      console.error('please login');
+      dispatch(showError({ text: 'Login to perform that action!' }));
+
+      setTimeout(() => dispatch(hideError()), 2000);
     }
   };
 

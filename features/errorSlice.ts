@@ -1,12 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 type Error = {
-  isOpen: boolean;
+  errorOpen: boolean;
   text: string;
 };
 
 const initialState: Error = {
-  isOpen: false,
+  errorOpen: false,
   text: '',
 };
 
@@ -15,12 +15,11 @@ const errorSlice = createSlice({
   initialState,
   reducers: {
     showError: (state, { payload }) => {
-      state.isOpen = true;
+      state.errorOpen = true;
       state.text = payload.text;
     },
     hideError: (state) => {
-      state.isOpen = false;
-      state.text = '';
+      state.errorOpen = false;
     },
   },
 });
