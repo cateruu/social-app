@@ -3,6 +3,7 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useAppSelector } from '../app/hooks';
 import CommentModal from '../components/CommentModal/CommentModal';
+import Error from '../components/Error/Error';
 import Feed from '../components/Feed/Feed';
 
 import PostInput from '../components/PostInput/PostInput';
@@ -21,6 +22,7 @@ const Home: NextPage = () => {
         <title>Social App</title>
         <meta name='description' content='The best social app on earth.' />
       </Head>
+      <Error />
       {isOpen && <CommentModal />}
       {!user ? <PostLogin /> : <PostInput type='post' />}
       <Feed />

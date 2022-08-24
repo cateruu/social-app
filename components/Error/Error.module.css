@@ -1,0 +1,11 @@
+.error {
+  background-color: var(--error);
+  padding: 10px 20px;
+  text-align: center;
+  color: var(--text-color);
+  border-radius: 10px;
+  position: fixed;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+}
