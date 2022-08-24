@@ -25,18 +25,18 @@ const Header = () => {
       <div className={styles.container}>
         <Theme />
         {!user && (
-          <a href='/api/auth/login'>
+          <Link href='/api/auth/login'>
             <button className={`${styles.button} ${styles.login}`}>
               Login
             </button>
-          </a>
+          </Link>
         )}
         {user && (
-          <a href='/api/auth/logout'>
+          <Link href='/api/auth/logout'>
             <button className={`${styles.button} ${styles.logout}`}>
               Logout
             </button>
-          </a>
+          </Link>
         )}
       </div>
     </header>
