@@ -49,16 +49,16 @@ const Post = ({ post, id }: Post) => {
   }, [id]);
 
   useEffect(
-    () => setLiked(likesArr.findIndex((like) => user?.sub === like.id) !== -1),
+    () => setLiked(likesArr.findIndex((like) => user?.sid === like.id) !== -1),
     [likesArr, user]
   );
 
   const likePost = async () => {
     if (user) {
       if (liked) {
-        await deleteDoc(doc(db, 'posts', id!, 'likes', user?.sub!));
+        await deleteDoc(doc(db, 'posts', id!, 'likes', user?.sid as string));
       } else {
-        await setDoc(doc(db, 'posts', id!, 'likes', user?.sub!), {
+        await setDoc(doc(db, 'posts', id!, 'likes', user?.sid as string), {
           username: user?.nickname,
         });
       }
@@ -85,7 +85,7 @@ const Post = ({ post, id }: Post) => {
           />
           <p className={styles.username}>{post.username}</p>
         </div>
-        {user?.sub === post?.id && (
+        {user?.sid === post?.id && (
           <div className={styles.delete}>
             <FiTrash2
               onClick={(e: MouseEvent) => {

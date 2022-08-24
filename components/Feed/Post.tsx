@@ -59,16 +59,16 @@ const Post: NextPage<Post> = ({ id, post }) => {
   }, [id]);
 
   useEffect(
-    () => setLiked(likesArr.findIndex((like) => user?.sub === like.id) !== -1),
+    () => setLiked(likesArr.findIndex((like) => user?.sid === like.id) !== -1),
     [likesArr, user]
   );
 
   const likePost = async () => {
     if (user) {
       if (liked) {
-        await deleteDoc(doc(db, 'posts', id!, 'likes', user?.sub!));
+        await deleteDoc(doc(db, 'posts', id!, 'likes', user?.sid as string));
       } else {
-        await setDoc(doc(db, 'posts', id!, 'likes', user?.sub!), {
+        await setDoc(doc(db, 'posts', id!, 'likes', user?.sid as string), {
           username: user?.username,
         });
       }
@@ -157,7 +157,7 @@ const Post: NextPage<Post> = ({ id, post }) => {
               <span className={styles.amount}>{commentsArr.length}</span>
             )}
           </div>
-          {user?.sub === post?.id && (
+          {user?.sid === post?.id && (
             <div className={`${styles.iconContainer} ${styles.delete}`}>
               <FiTrash2
                 onClick={(e: MouseEvent) => {
