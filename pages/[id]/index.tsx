@@ -26,16 +26,16 @@ const PostPage = () => {
 
   const [post, setPost] = useState<PostType | undefined>(undefined);
 
-  useEffect(
-    () =>
+  useEffect(() => {
+    if (id) {
       onSnapshot(
         doc(db, 'posts', id! as string) as DocumentReference<PostType>,
         (snapshot) => {
           setPost(snapshot.data());
         }
-      ),
-    [id]
-  );
+      );
+    }
+  }, [id]);
 
   return (
     <>

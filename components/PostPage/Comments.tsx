@@ -38,8 +38,8 @@ const Comments = ({ id }: Props) => {
     QueryDocumentSnapshot<Comment>[] | null
   >(null);
 
-  useEffect(
-    () =>
+  useEffect(() => {
+    if (id) {
       onSnapshot(
         query(
           collection(
@@ -53,9 +53,9 @@ const Comments = ({ id }: Props) => {
         (snapshot) => {
           setComments(snapshot.docs);
         }
-      ),
-    [id]
-  );
+      );
+    }
+  }, [id]);
 
   return (
     <section

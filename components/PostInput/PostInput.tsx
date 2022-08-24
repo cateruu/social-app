@@ -87,7 +87,6 @@ const PostInput: NextPage<InputType> = ({ type, id }) => {
   };
 
   const sendComment = async () => {
-    console.log(id);
     const docRef = await addDoc(collection(db, 'posts', id!, 'comments'), {
       comment: textInput,
       username: user?.nickname,
