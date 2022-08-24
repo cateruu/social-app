@@ -7,6 +7,7 @@ import {
   DocumentData,
   onSnapshot,
   setDoc,
+  Timestamp,
 } from 'firebase/firestore';
 import { db } from '../../config/firebase';
 import { NextPage } from 'next';
@@ -85,7 +86,10 @@ const Post: NextPage<Post> = ({ id, post }) => {
         openCommentModal({
           post: {
             ...post,
-            timestamp: post.timestamp.toDate().getTime(),
+            timestamp: {
+              nanoseconds: post.timestamp.nanoseconds,
+              seconds: post.timestamp.seconds,
+            },
           },
           postId: id,
         })

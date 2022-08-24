@@ -9,10 +9,16 @@ import { IoMdClose } from 'react-icons/io';
 import Moment from 'react-moment';
 
 import PostInput from '../PostInput/PostInput';
+import { Timestamp } from 'firebase/firestore';
 
 const CommentModal = () => {
   const dispatch = useAppDispatch();
   const { postInfo, postId } = useAppSelector((state) => state.commentModal);
+
+  const date = new Timestamp(
+    postInfo?.timestamp.seconds!,
+    postInfo?.timestamp.nanoseconds!
+  );
 
   return (
     <>
@@ -39,7 +45,7 @@ const CommentModal = () => {
             <div className={styles.usernameContainer}>
               <h4 className={styles.username}>{postInfo?.username}</h4>
               <Moment fromNow className={styles.time}>
-                {new Date(postInfo?.timestamp)}
+                {date.toDate()}
               </Moment>
             </div>
             <div>
