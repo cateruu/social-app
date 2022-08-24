@@ -63,7 +63,7 @@ const PostInput: NextPage<InputType> = ({ type, id }) => {
 
     const docRef = await addDoc(collection(db, 'posts'), {
       id: user?.sub,
-      username: user?.nickname,
+      username: user?.username,
       profilePic: user?.picture,
       text: textInput,
       timestamp: serverTimestamp(),
@@ -89,7 +89,7 @@ const PostInput: NextPage<InputType> = ({ type, id }) => {
   const sendComment = async () => {
     const docRef = await addDoc(collection(db, 'posts', id!, 'comments'), {
       comment: textInput,
-      username: user?.nickname,
+      username: user?.username,
       id: user?.sub,
       profilePic: user?.picture,
       timestamp: serverTimestamp(),

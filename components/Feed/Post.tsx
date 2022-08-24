@@ -69,7 +69,7 @@ const Post: NextPage<Post> = ({ id, post }) => {
         await deleteDoc(doc(db, 'posts', id!, 'likes', user?.sub!));
       } else {
         await setDoc(doc(db, 'posts', id!, 'likes', user?.sub!), {
-          username: user?.nickname,
+          username: user?.username,
         });
       }
     } else {
