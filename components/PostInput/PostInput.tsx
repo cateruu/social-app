@@ -62,7 +62,7 @@ const PostInput: NextPage<InputType> = ({ type, id }) => {
     setLoading(true);
 
     const docRef = await addDoc(collection(db, 'posts'), {
-      id: user?.sid,
+      id: user?.sub,
       username: user?.username,
       profilePic: user?.picture,
       text: textInput,
@@ -88,7 +88,7 @@ const PostInput: NextPage<InputType> = ({ type, id }) => {
 
   const sendComment = async () => {
     const docRef = await addDoc(collection(db, 'posts', id!, 'comments'), {
-      id: user?.sid,
+      id: user?.sub,
       comment: textInput,
       username: user?.username,
       profilePic: user?.picture,
@@ -111,7 +111,7 @@ const PostInput: NextPage<InputType> = ({ type, id }) => {
     setSelectedImage(null);
     setShowEmojis(false);
 
-    router.push(`/${id}`);
+    router.push(`/post/${id}`);
   };
 
   const addImageToPost = (e: BaseSyntheticEvent) => {

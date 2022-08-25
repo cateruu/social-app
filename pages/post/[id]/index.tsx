@@ -3,21 +3,21 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 
 import { doc, DocumentReference, onSnapshot } from 'firebase/firestore';
-import { db } from '../../config/firebase';
+import { db } from '../../../config/firebase';
 
 import styles from './PostPage.module.css';
 
-import { PostType } from '../../components/Feed/Feed';
-import Post from '../../components/PostPage/Post';
+import { PostType } from '../../../components/Feed/Feed';
+import Post from '../../../components/PostPage/Post';
 
-import BackHome from '../../components/PostPage/BackHome';
-import PostInput from '../../components/PostInput/PostInput';
-import Comments from '../../components/PostPage/Comments';
-import { useTheme } from '../../app/theme-context';
+import BackHome from '../../../components/PostPage/BackHome';
+import PostInput from '../../../components/PostInput/PostInput';
+import Comments from '../../../components/PostPage/Comments';
+import { useTheme } from '../../../app/theme-context';
 import { useUser } from '@auth0/nextjs-auth0';
 import { AnimatePresence } from 'framer-motion';
-import { useAppSelector } from '../../app/hooks';
-import Error from '../../components/Error/Error';
+import { useAppSelector } from '../../../app/hooks';
+import Error from '../../../components/Error/Error';
 
 const PostPage = () => {
   const { theme } = useTheme();

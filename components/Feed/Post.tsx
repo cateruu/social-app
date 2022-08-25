@@ -60,16 +60,16 @@ const Post: NextPage<Post> = ({ id, post }) => {
   }, [id]);
 
   useEffect(
-    () => setLiked(likesArr.findIndex((like) => user?.sid === like.id) !== -1),
+    () => setLiked(likesArr.findIndex((like) => user?.sub === like.id) !== -1),
     [likesArr, user]
   );
 
   const likePost = async () => {
     if (user) {
       if (liked) {
-        await deleteDoc(doc(db, 'posts', id!, 'likes', user?.sid as string));
+        await deleteDoc(doc(db, 'posts', id!, 'likes', user?.sub as string));
       } else {
-        await setDoc(doc(db, 'posts', id!, 'likes', user?.sid as string), {
+        await setDoc(doc(db, 'posts', id!, 'likes', user?.sub as string), {
           username: user?.username,
         });
       }
@@ -107,7 +107,7 @@ const Post: NextPage<Post> = ({ id, post }) => {
   return (
     <section
       className={`${styles.post} ${theme === 'light' && styles.light}`}
-      onClick={() => router.push(`/${id}`)}
+      onClick={() => router.push(`/post/${id}`)}
     >
       <div className={styles.profilePicContainer}>
         <Image
@@ -161,7 +161,7 @@ const Post: NextPage<Post> = ({ id, post }) => {
               <span className={styles.amount}>{commentsArr.length}</span>
             )}
           </div>
-          {user?.sid === post?.id && (
+          {user?.sub === post?.id && (
             <div className={`${styles.iconContainer} ${styles.delete}`}>
               <FiTrash2
                 onClick={(e: MouseEvent) => {
