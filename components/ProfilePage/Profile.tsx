@@ -2,20 +2,21 @@ import { useUser } from '@auth0/nextjs-auth0';
 import { GetStaticProps } from 'next';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import { useTheme } from '../../app/theme-context';
 
 import styles from './Profile.module.css';
 
 const Profile = () => {
   const { user, error, isLoading } = useUser();
-
-  const router = useRouter();
-  const { username } = router.query;
+  const { theme } = useTheme();
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>{error.message}</div>;
 
   return (
-    <section className={styles.profile}>
+    <section
+      className={`${styles.profile} ${theme === 'light' && styles.light}`}
+    >
       <Image
         src={user?.picture!}
         alt={user?.username as string}
@@ -23,7 +24,13 @@ const Profile = () => {
         height={100}
         className={styles.image}
       />
-      <p className={styles.username}>{user?.username as string}</p>
+      <p
+        className={`${styles.username} ${
+          theme === 'light' && styles.lightUsername
+        }`}
+      >
+        {user?.username as string}
+      </p>
     </section>
   );
 };
