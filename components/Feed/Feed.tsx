@@ -65,8 +65,10 @@ const Feed = ({ type }: Props) => {
         <Post key={post.id} id={post.id} post={post.data()} />
       ))}
       {posts?.length! < 1 && type === 'profile' ? (
-        <p>You have no posts</p>
-      ) : null}
+        <p className={styles.message}>You have no posts</p>
+      ) : (
+        posts?.length! < 1 && <p className={styles.message}>No posts</p>
+      )}
     </section>
   );
 };

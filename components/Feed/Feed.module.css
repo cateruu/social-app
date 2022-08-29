@@ -5,3 +5,8 @@
   align-items: center;
   margin-top: 20px;
 }
+
+.message {
+  color: var(--text-color);
+  font-size: 2rem;
+}
