@@ -21,7 +21,11 @@ export const postCreationTime = (timestamp: Timestamp) => {
   const month = monthNames[date.getMonth()];
   const year = date.getFullYear();
   const hour = date.getHours();
-  const minutes = date.getMinutes();
+  let minutes: number | string = date.getMinutes();
+
+  if (minutes < 10) {
+    minutes = `0${minutes}`;
+  }
 
   return `${hour}:${minutes} ${month} ${day}, ${year}`;
 };
