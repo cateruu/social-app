@@ -21,7 +21,9 @@ const Profile = () => {
         alt={user?.username as string}
         width={100}
         height={100}
+        className={styles.image}
       />
+      <p className={styles.username}>{user?.username as string}</p>
     </section>
   );
 };

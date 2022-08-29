@@ -34,7 +34,7 @@ const Header = () => {
         {user && (
           <button
             className={styles.profile}
-            onClick={() => router.push(`/user/${username}`)}
+            onClick={() => router.push(`/profile`)}
           >
             <BsFillPersonFill />
           </button>
