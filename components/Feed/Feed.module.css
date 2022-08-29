@@ -10,3 +10,7 @@
   color: var(--text-color);
   font-size: 2rem;
 }
+
+.light {
+  color: var(--text-color-light);
+}

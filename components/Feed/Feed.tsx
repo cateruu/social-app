@@ -17,6 +17,7 @@ import styles from './Feed.module.css';
 
 import Post from './Post';
 import { useUser } from '@auth0/nextjs-auth0';
+import { useTheme } from '../../app/theme-context';
 
 export interface PostType {
   id: string;
@@ -36,6 +37,7 @@ const Feed = ({ type }: Props) => {
     null
   );
   const { user, error, isLoading } = useUser();
+  const { theme } = useTheme();
 
   useEffect(() => {
     let queryRef;
@@ -64,10 +66,10 @@ const Feed = ({ type }: Props) => {
       {posts?.map((post) => (
         <Post key={post.id} id={post.id} post={post.data()} />
       ))}
-      {posts?.length! < 1 && type === 'profile' ? (
-        <p className={styles.message}>You have no posts</p>
-      ) : (
-        posts?.length! < 1 && <p className={styles.message}>No posts</p>
+      {posts?.length! < 1 && (
+        <p className={`${styles.message} ${theme === 'light' && styles.light}`}>
+          Post something
+        </p>
       )}
     </section>
   );
