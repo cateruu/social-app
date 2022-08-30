@@ -17,7 +17,15 @@ const Header = () => {
 
   const router = useRouter();
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading)
+    return (
+      <div className='loading'>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    );
   if (error) return <div>{error.message}</div>;
 
   const username = user?.username;
