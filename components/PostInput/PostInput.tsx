@@ -35,12 +35,12 @@ const Picker = dynamic(
   { ssr: false }
 );
 
-type InputType = {
+type Props = {
   type: string;
   id?: string;
 };
 
-const PostInput: NextPage<InputType> = ({ type, id }) => {
+const PostInput = ({ type, id }: Props) => {
   const { theme } = useTheme();
   const router = useRouter();
 

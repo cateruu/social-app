@@ -15,8 +15,6 @@ import { db } from '../../config/firebase';
 
 import { useUser } from '@auth0/nextjs-auth0';
 
-import { PostType } from '../Feed/Feed';
-
 import styles from './Post.module.css';
 import { FiTrash2 } from 'react-icons/fi';
 
@@ -25,6 +23,7 @@ import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import { useTheme } from '../../app/theme-context';
 import { useAppDispatch } from '../../app/hooks';
 import { hideError, showError } from '../../features/errorSlice';
+import { PostType } from '../../utils/types';
 
 type Post = {
   post: PostType;

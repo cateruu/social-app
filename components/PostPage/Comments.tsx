@@ -17,15 +17,7 @@ import { uuid } from 'uuidv4';
 
 import Comment from './Comment';
 import { useTheme } from '../../app/theme-context';
-
-export type Comment = {
-  id: string;
-  username: string;
-  profilePic: string;
-  comment: string;
-  image?: string;
-  timestamp: Timestamp;
-};
+import { CommentType } from '../../utils/types';
 
 type Props = {
   id: string;
@@ -35,7 +27,7 @@ const Comments = ({ id }: Props) => {
   const { theme } = useTheme();
 
   const [comments, setComments] = useState<
-    QueryDocumentSnapshot<Comment>[] | null
+    QueryDocumentSnapshot<CommentType>[] | null
   >(null);
 
   useEffect(() => {
@@ -47,7 +39,7 @@ const Comments = ({ id }: Props) => {
             'posts',
             id!,
             'comments'
-          ) as CollectionReference<Comment>,
+          ) as CollectionReference<CommentType>,
           orderBy('timestamp', 'desc')
         ),
         (snapshot) => {

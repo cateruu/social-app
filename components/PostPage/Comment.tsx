@@ -1,12 +1,11 @@
 import Image from 'next/image';
 import Moment from 'react-moment';
 import { useTheme } from '../../app/theme-context';
+import { CommentType } from '../../utils/types';
 import styles from './Comment.module.css';
 
-import { Comment } from './Comments';
-
 type Props = {
-  content: Comment;
+  content: CommentType;
 };
 
 const Comment = ({ content }: Props) => {

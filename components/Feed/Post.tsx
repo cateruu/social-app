@@ -16,8 +16,6 @@ import { useRouter } from 'next/router';
 
 import styles from './Post.module.css';
 
-import { PostType } from './Feed';
-
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
 import { FaRegComment } from 'react-icons/fa';
 import { FiTrash2 } from 'react-icons/fi';
@@ -28,14 +26,15 @@ import Moment from 'react-moment';
 import { useAppDispatch } from '../../app/hooks';
 import { openCommentModal } from '../../features/commentModalSlice';
 import { hideError, showError } from '../../features/errorSlice';
+import { PostType } from '../../utils/types';
 
-interface Post {
+type Props = {
   id: string;
   post: PostType;
   postPage?: any;
-}
+};
 
-const Post: NextPage<Post> = ({ id, post }) => {
+const Post = ({ id, post }: Props) => {
   const { theme } = useTheme();
   const router = useRouter();
 
@@ -101,7 +100,15 @@ const Post: NextPage<Post> = ({ id, post }) => {
     }
   };
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading)
+    return (
+      <div className='loading'>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    );
   if (error) return <div>{error.message}</div>;
 
   return (

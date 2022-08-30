@@ -8,7 +8,6 @@ import {
   orderBy,
   query,
   QueryDocumentSnapshot,
-  Timestamp,
   where,
 } from 'firebase/firestore';
 import { db } from '../../config/firebase';
@@ -18,15 +17,7 @@ import styles from './Feed.module.css';
 import Post from './Post';
 import { useUser } from '@auth0/nextjs-auth0';
 import { useTheme } from '../../app/theme-context';
-
-export interface PostType {
-  id: string;
-  image: string;
-  profilePic: string;
-  text: string;
-  timestamp: Timestamp;
-  username: string;
-}
+import { PostType } from '../../utils/types';
 
 type Props = {
   type?: string;
