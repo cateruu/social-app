@@ -42,7 +42,15 @@ const PostPage = () => {
     }
   }, [id]);
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading)
+    return (
+      <div className='loading'>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    );
   if (error) return <div>{error.message}</div>;
 
   return (
@@ -55,7 +63,14 @@ const PostPage = () => {
       </Head>
       <AnimatePresence>{errorOpen && <Error />}</AnimatePresence>
       <BackHome />
-      {!post && <div>Loading...</div>}
+      {!post && (
+        <div className='loading'>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      )}
       {post && <Post post={post} id={id as string} />}
       <section
         className={`${styles.input} ${theme === 'light' && styles.light}`}
