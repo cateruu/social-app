@@ -1,7 +1,5 @@
 import { useUser } from '@auth0/nextjs-auth0';
-import { GetStaticProps } from 'next';
 import Image from 'next/image';
-import { useRouter } from 'next/router';
 import { useTheme } from '../../app/theme-context';
 
 import styles from './Profile.module.css';
@@ -10,7 +8,15 @@ const Profile = () => {
   const { user, error, isLoading } = useUser();
   const { theme } = useTheme();
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading)
+    return (
+      <div className='loading'>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    );
   if (error) return <div>{error.message}</div>;
 
   return (
