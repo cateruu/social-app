@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { PostType } from '../components/Feed/Feed';
+import { PostType } from '../utils/types';
 
 type CommentType = {
   isOpen: boolean;

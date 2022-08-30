@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import {
   collection,
   CollectionReference,
-  limit,
   onSnapshot,
   orderBy,
   query,
