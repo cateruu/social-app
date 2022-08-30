@@ -8,6 +8,7 @@ import { Provider } from 'react-redux';
 import { store } from '../app/store';
 
 import Layout from '../components/Layout/Layout';
+import Head from 'next/head';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -15,6 +16,9 @@ function MyApp({ Component, pageProps }: AppProps) {
       <ThemeContextProvider>
         <Provider store={store}>
           <Layout>
+            <Head>
+              <link rel='shortcut icon' href='/favicon.png' />
+            </Head>
             <Component {...pageProps} />
           </Layout>
         </Provider>
