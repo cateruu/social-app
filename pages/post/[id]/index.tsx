@@ -7,7 +7,6 @@ import { db } from '../../../config/firebase';
 
 import styles from './PostPage.module.css';
 
-import { PostType } from '../../../components/Feed/Feed';
 import Post from '../../../components/PostPage/Post';
 
 import BackHome from '../../../components/PostPage/BackHome';
@@ -18,6 +17,7 @@ import { useUser } from '@auth0/nextjs-auth0';
 import { AnimatePresence } from 'framer-motion';
 import { useAppSelector } from '../../../app/hooks';
 import Error from '../../../components/Error/Error';
+import { PostType } from '../../../utils/types';
 
 const PostPage = () => {
   const { theme } = useTheme();
