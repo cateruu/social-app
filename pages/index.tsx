@@ -31,6 +31,8 @@ const Home: NextPage = () => {
       <Head>
         <title>Social App</title>
         <meta name='description' content='The best social app on earth.' />
+        <meta name='keywords' content='Social app, social, social media' />
+        <meta name='author' content='Paweł Kromołowski' />
       </Head>
       <AnimatePresence>{errorOpen && <Error />}</AnimatePresence>
       {isOpen && <CommentModal />}

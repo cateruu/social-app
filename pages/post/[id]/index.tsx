@@ -60,6 +60,11 @@ const PostPage = () => {
           {post?.username} on Social: {`"${post?.text}"`}
         </title>
         <meta name='description' content='Post page on Social app' />
+        <meta
+          name='keywords'
+          content='Social app, social, social media, post'
+        />
+        <meta name='author' content='Paweł Kromołowski' />
       </Head>
       <AnimatePresence>{errorOpen && <Error />}</AnimatePresence>
       <BackHome />
